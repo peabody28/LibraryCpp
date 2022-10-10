@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Subscriber">
+      <UniqueIdentifier>{57967ad3-a533-4e68-b9f6-02dbaae07356}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DateTime">
+      <UniqueIdentifier>{d466db5c-aeaa-4194-be7f-64cd47f1bf9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Book">
+      <UniqueIdentifier>{96f07b10-43de-4154-8e00-d92e843ccad4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ReaderCard">
+      <UniqueIdentifier>{3bf963cd-7c11-46be-b77a-2e278ecaabd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Workman">
+      <UniqueIdentifier>{6377d191-de30-431c-8cf3-7c89e9973016}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Helpers">
+      <UniqueIdentifier>{ba5f25da-a00e-4548-8cff-8a357f559521}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Subscriber\Repositories">
+      <UniqueIdentifier>{897d6596-3389-4e37-b4c1-653ea92b5d2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Book\Repositories">
+      <UniqueIdentifier>{a3f8bee1-97ea-4744-8a6d-03c80258d21b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Workman\Repositories">
+      <UniqueIdentifier>{0f6924c7-f2d4-4596-aaa8-5b4df0c78ccf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LibraryCpp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Library.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Workman.h">
+      <Filter>Header Files\Workman</Filter>
+    </ClCompile>
+    <ClCompile Include="Assistant.h">
+      <Filter>Header Files\Workman</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager.h">
+      <Filter>Header Files\Workman</Filter>
+    </ClCompile>
+    <ClCompile Include="Director.h">
+      <Filter>Header Files\Workman</Filter>
+    </ClCompile>
+    <ClCompile Include="ReaderCard.h">
+      <Filter>Header Files\ReaderCard</Filter>
+    </ClCompile>
+    <ClCompile Include="Row.h">
+      <Filter>Header Files\ReaderCard</Filter>
+    </ClCompile>
+    <ClCompile Include="DateTime.h">
+      <Filter>Header Files\DateTime</Filter>
+    </ClCompile>
+    <ClCompile Include="Book.h">
+      <Filter>Header Files\Book</Filter>
+    </ClCompile>
+    <ClCompile Include="SubscriberRepository.h">
+      <Filter>Header Files\Subscriber\Repositories</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Subscriber.h">
+      <Filter>Header Files\Subscriber</Filter>
+    </ClInclude>
+    <ClInclude Include="BookRepository.h">
+      <Filter>Header Files\Book\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="WorkmanType.h">
+      <Filter>Header Files\Workman</Filter>
+    </ClInclude>
+    <ClInclude Include="WorkmanRepository.h">
+      <Filter>Header Files\Workman\Repositories</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
