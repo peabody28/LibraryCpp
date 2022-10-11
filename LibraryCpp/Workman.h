@@ -8,5 +8,7 @@ private:
 	std::string name;
 public:
 	WorkmanType type;
+
+	friend class WorkmanRepository;
 };
 

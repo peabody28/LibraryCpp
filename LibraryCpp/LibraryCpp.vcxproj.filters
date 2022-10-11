@@ -40,12 +40,18 @@
     <Filter Include="Header Files\Workman\Repositories">
       <UniqueIdentifier>{0f6924c7-f2d4-4596-aaa8-5b4df0c78ccf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Library">
+      <UniqueIdentifier>{8fac8cb6-6020-4e8c-a3b7-6feed2c04a7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Exception">
+      <UniqueIdentifier>{0be463ad-07f6-497e-b271-f3e37e4d6201}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ReaderCard\Repositories">
+      <UniqueIdentifier>{f47e1f84-b7cf-4ab7-9a57-9cf11298c3a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LibraryCpp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Library.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Workman.h">
@@ -72,8 +78,14 @@
     <ClCompile Include="Book.h">
       <Filter>Header Files\Book</Filter>
     </ClCompile>
-    <ClCompile Include="SubscriberRepository.h">
-      <Filter>Header Files\Subscriber\Repositories</Filter>
+    <ClCompile Include="Library.h">
+      <Filter>Header Files\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="DateTimeHelper.h">
+      <Filter>Header Files\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="ReaderCardRepository.h">
+      <Filter>Header Files\ReaderCard\Repositories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +100,21 @@
     </ClInclude>
     <ClInclude Include="WorkmanRepository.h">
       <Filter>Header Files\Workman\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="StringHelper.h">
+      <Filter>Header Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Exception.h">
+      <Filter>Header Files\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="PermissionDeniedException.h">
+      <Filter>Header Files\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="SubscriberRepository.h">
+      <Filter>Header Files\Subscriber\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="RowRepository.h">
+      <Filter>Header Files\ReaderCard\Repositories</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

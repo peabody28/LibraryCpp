@@ -13,4 +13,9 @@ public:
 			if (book.id == id)
 				return book;
 	}
+
+	std::vector<Book> Collection()
+	{
+		return books;
+	}
 };

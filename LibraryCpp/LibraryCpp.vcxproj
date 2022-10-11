@@ -102,7 +102,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -130,18 +130,24 @@
     <ClCompile Include="Assistant.h" />
     <ClCompile Include="Book.h" />
     <ClCompile Include="DateTime.h" />
+    <ClCompile Include="DateTimeHelper.h" />
     <ClCompile Include="Director.h" />
-    <ClCompile Include="Library.cpp" />
+    <ClCompile Include="Library.h" />
     <ClCompile Include="LibraryCpp.cpp" />
     <ClCompile Include="Manager.h" />
     <ClCompile Include="ReaderCard.h" />
     <ClCompile Include="Row.h" />
-    <ClCompile Include="SubscriberRepository.h" />
+    <ClCompile Include="ReaderCardRepository.h" />
     <ClCompile Include="Workman.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BookRepository.h" />
+    <ClInclude Include="Exception.h" />
+    <ClInclude Include="PermissionDeniedException.h" />
+    <ClInclude Include="RowRepository.h" />
+    <ClInclude Include="StringHelper.h" />
     <ClInclude Include="Subscriber.h" />
+    <ClInclude Include="SubscriberRepository.h" />
     <ClInclude Include="WorkmanRepository.h" />
     <ClInclude Include="WorkmanType.h" />
   </ItemGroup>
