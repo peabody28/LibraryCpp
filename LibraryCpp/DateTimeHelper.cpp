@@ -1,5 +1,7 @@
 #include "DateTimeHelper.h"
+#include "DateTime.h"
 #include <ctime>
+#include <string>
 
 int DateTimeHelper::Compare(DateTime a, DateTime b)
 {

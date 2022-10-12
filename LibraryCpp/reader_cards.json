@@ -1,0 +1,12 @@
+[
+  {
+    "id": "1",
+    "subscriberId": "2",
+    "isBlocked":  "false"
+  },
+  {
+    "id": "2",
+    "subscriberId": "1",
+    "isBlocked":  "true"
+  }
+]

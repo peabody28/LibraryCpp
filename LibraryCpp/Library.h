@@ -1,3 +1,5 @@
+/*
+#pragma once
 #include <vector>
 #include "Workman.h"
 #include "ReaderCard.h"
@@ -6,6 +8,7 @@
 #include "PermissionDeniedException.h"
 #include "ReaderCardRepository.h"
 #include "WorkmanRepository.h"
+
 
 std::ostream& operator << (std::ostream& os, const DateTime& d)
 {
@@ -101,3 +104,4 @@ public:
 		readerCardRepository.AddRow(subscriber, book);
 	}
 };
+*/

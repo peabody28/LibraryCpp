@@ -1,7 +1,8 @@
 #pragma once
 #include "DateTime.h"
+#include <string>
 
-static class DateTimeHelper
+class DateTimeHelper
 {
 public:
 	static int Compare(DateTime a, DateTime b);

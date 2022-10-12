@@ -1,22 +1,18 @@
 #pragma once
 #include <string>
+#include <fstream>
 
 class Subscriber
 {
 private:
-	static int Id;
-	int id;
+	int Id;
 	std::string name;
 public:
+	int id;
 
 	Subscriber();
 
 	Subscriber(std::string _name);
 
 	Subscriber(int _id, std::string _name);
-
-	friend class SubscriberRepository;
-	friend class ReaderCardRepository;
-	friend class Library;
-	friend std::ostream& operator << (std::ostream& os, const Subscriber& s);
 };

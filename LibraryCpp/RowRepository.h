@@ -8,7 +8,6 @@ private:
 	std::vector<Row> rows;
 
 	void Build();
-
 public:
 	RowRepository();
 

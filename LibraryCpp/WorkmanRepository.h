@@ -1,16 +1,17 @@
 #pragma once
-#include <vector>
 #include "Workman.h"
+#include <vector>
+#include <string>
 
 class WorkmanRepository
 {
 private:
 	std::vector<Workman> staff;
+
+	void Build();
 public:
-	Workman ObjectByName(std::string name)
-	{
-		for (auto man : staff)
-			if (!man.name.compare(name))
-				return man;
-	}
+
+	WorkmanRepository();
+
+	Workman ObjectByName(std::string name);
 };

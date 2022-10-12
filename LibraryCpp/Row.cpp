@@ -1,7 +1,13 @@
 #include "Row.h"
+#include "Book.h"
+#include "DateTime.h"
 #include "DateTimeHelper.h"
 
-int Row::Id = 0;
+Row::Row() {
+	id = -1;
+	isReturned = false;
+	readerCardId = -1;
+}
 
 Row::Row(Book _book, DateTime from, DateTime to)
 {
@@ -12,10 +18,11 @@ Row::Row(Book _book, DateTime from, DateTime to)
 	isReturned = false;
 }
 
-Row::Row(int _id, int _bookId, DateTime from, DateTime to, bool _isRet)
+Row::Row(int _id, int _bookId, int _readerCardId, DateTime from, DateTime to, bool _isRet)
 {
 	id = _id;
 	book = bookRepository.Object(_bookId);
+	readerCardId = _readerCardId;
 	dateFrom = from;
 	dateTo = to;
 	isReturned = _isRet;

@@ -1,4 +1,6 @@
 #include "FileHelper.h"
+#include <fstream>
+#include <string>
 
 std::string FileHelper::Read(std::ifstream* f)
 {

@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-static class StringHelper
+class StringHelper
 {
 public:
 	static std::string ToString(int num);

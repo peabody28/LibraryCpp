@@ -1,9 +1,9 @@
 #include "Subscriber.h"
-
-int Subscriber::Id = 1;
+#include <string>
 
 Subscriber::Subscriber()
 {
+	Id = 0;
 	id = Id;
 }
 

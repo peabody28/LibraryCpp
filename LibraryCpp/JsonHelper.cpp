@@ -1,4 +1,7 @@
 #include "JsonHelper.h"
+#include <string>
+#include <map>
+#include <vector>
 
 std::vector<std::map<std::string, std::string>> JsonHelper::Parse(std::string json)
 {

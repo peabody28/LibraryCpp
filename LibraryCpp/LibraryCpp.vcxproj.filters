@@ -82,6 +82,9 @@
     <Filter Include="Source Files\Subscriber\Repositories">
       <UniqueIdentifier>{d953e18c-fb26-4842-806d-5f4e6aa94e57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Workman\Repositories">
+      <UniqueIdentifier>{14bc16e1-2cd7-4cf4-a1a1-48526f34daf5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LibraryCpp.cpp">
@@ -99,9 +102,6 @@
     <ClCompile Include="Director.h">
       <Filter>Header Files\Workman</Filter>
     </ClCompile>
-    <ClCompile Include="ReaderCard.h">
-      <Filter>Header Files\ReaderCard</Filter>
-    </ClCompile>
     <ClCompile Include="Row.h">
       <Filter>Header Files\ReaderCard</Filter>
     </ClCompile>
@@ -116,9 +116,6 @@
     </ClCompile>
     <ClCompile Include="DateTimeHelper.h">
       <Filter>Header Files\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="ReaderCardRepository.h">
-      <Filter>Header Files\ReaderCard\Repositories</Filter>
     </ClCompile>
     <ClCompile Include="JsonHelper.h">
       <Filter>Header Files\Helpers</Filter>
@@ -150,14 +147,8 @@
     <ClCompile Include="StringHelper.cpp">
       <Filter>Source Files\Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="ReaderCardRepository.cpp">
-      <Filter>Source Files\ReaderCard\Repositories</Filter>
-    </ClCompile>
     <ClCompile Include="RowRepository.cpp">
       <Filter>Source Files\ReaderCard\Repositories</Filter>
-    </ClCompile>
-    <ClCompile Include="ReaderCard.cpp">
-      <Filter>Source Files\ReaderCard</Filter>
     </ClCompile>
     <ClCompile Include="Row.cpp">
       <Filter>Source Files\ReaderCard</Filter>
@@ -167,6 +158,9 @@
     </ClCompile>
     <ClCompile Include="SubscriberRepository.cpp">
       <Filter>Source Files\Subscriber\Repositories</Filter>
+    </ClCompile>
+    <ClCompile Include="WorkmanRepository.cpp">
+      <Filter>Source Files\Workman\Repositories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -208,5 +202,12 @@
     <None Include="rows.json">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="subscribers.json">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="reader_cards.json">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

@@ -2,7 +2,9 @@
 #include "FileHelper.h"
 #include "JsonHelper.h"
 #include "StringHelper.h"
-
+#include "Subscriber.h"
+#include <fstream>
+#include <string>
 
 void SubscriberRepository::Build()
 {
@@ -17,6 +19,8 @@ void SubscriberRepository::Build()
 		Subscriber tmp = Subscriber(StringHelper::ToInt(row["id"]), row["name"]);
 		subscribers.push_back(tmp);
 	}
+	f.close();
+
 }
 
 SubscriberRepository::SubscriberRepository()

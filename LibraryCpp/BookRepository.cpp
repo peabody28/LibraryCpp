@@ -2,6 +2,10 @@
 #include "StringHelper.h"
 #include "FileHelper.h"
 #include "JsonHelper.h"
+#include "Book.h"
+#include <fstream>
+#include <string>
+#include <vector>
 
 void BookRepository::Build()
 {
@@ -17,7 +21,7 @@ void BookRepository::Build()
 		books.push_back(tmp);
 	}
 
-	return;
+	f.close();
 }
 
 BookRepository::BookRepository()

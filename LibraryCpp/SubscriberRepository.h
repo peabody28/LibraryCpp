@@ -1,6 +1,7 @@
 #pragma once
-#include <vector>
 #include "Subscriber.h"
+#include <vector>
+#include <string>
 
 class SubscriberRepository
 {
