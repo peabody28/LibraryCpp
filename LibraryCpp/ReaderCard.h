@@ -11,8 +11,11 @@ private:
 	SubscriberRepository subscriberRepository;
 	RowRepository rowRepository;
 public:
+	int id;
 	Subscriber subscriber;
 	bool isBlocked;
+
+	ReaderCard();
 
 	ReaderCard(Subscriber sub);
 

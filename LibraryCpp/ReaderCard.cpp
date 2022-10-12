@@ -1,6 +1,8 @@
 #include "ReaderCard.h"
 #include "DateTimeHelper.h"
 
+ReaderCard::ReaderCard() {}
+
 ReaderCard::ReaderCard(Subscriber sub)
 {
 	subscriber = sub;

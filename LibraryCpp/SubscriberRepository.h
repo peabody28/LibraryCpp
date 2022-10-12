@@ -6,7 +6,11 @@ class SubscriberRepository
 {
 private:
 	std::vector<Subscriber> subscribers;
+
+	void Build();
 public:
+	SubscriberRepository();
+
 	Subscriber Object(int id);
 
 	Subscriber Create(std::string name);

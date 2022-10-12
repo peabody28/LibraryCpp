@@ -1,4 +1,28 @@
 #include "SubscriberRepository.h"
+#include "FileHelper.h"
+#include "JsonHelper.h"
+#include "StringHelper.h"
+
+
+void SubscriberRepository::Build()
+{
+	std::ifstream f("subscribers.json");
+
+	std::string json = FileHelper::Read(&f);
+
+	auto collection = JsonHelper::Parse(json);
+
+	for (auto row : collection)
+	{
+		Subscriber tmp = Subscriber(StringHelper::ToInt(row["id"]), row["name"]);
+		subscribers.push_back(tmp);
+	}
+}
+
+SubscriberRepository::SubscriberRepository()
+{
+	Build();
+}
 
 Subscriber SubscriberRepository::Object(int id)
 {
