@@ -6,5 +6,5 @@ class Exception
 public:
 	std::string msg;
 
-	Exception(std::string _msg) { msg = _msg; }
+	Exception(std::string _msg);
 };

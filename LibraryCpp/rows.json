@@ -1,0 +1,16 @@
+[
+  {
+    "id": "2",
+    "bookId": "1",
+    "dateFrom": "25.12.2022",
+    "dateTo": "25.1.2023",
+    "isReturned": "false"
+  },
+  {
+    "id": "1",
+    "bookId": "2",
+    "dateFrom": "11.08.2022",
+    "dateTo":  "11.09.2022",
+    "isReturned": "true"
+  }
+]

@@ -41,7 +41,7 @@ public:
 		for(int i = 0; i < readerCards.size(); i++)
 			if (readerCards[i].subscriber.id == subscriber.id)
 			{
-				readerCards.erase(readerCards.begin() + i - 1, readerCards.begin() + i);
+				readerCards.erase(readerCards.begin() + i);
 				subscriberRepository.Delete(subscriber);
 				break;
 			}

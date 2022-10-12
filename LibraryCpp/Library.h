@@ -5,6 +5,7 @@
 #include <iostream>
 #include "PermissionDeniedException.h"
 #include "ReaderCardRepository.h"
+#include "WorkmanRepository.h"
 
 std::ostream& operator << (std::ostream& os, const DateTime& d)
 {
@@ -24,10 +25,10 @@ std::ostream& operator << (std::ostream& os, const Book& s)
 class Library
 {
 private:
+	BookRepository bookRepository;
 	ReaderCardRepository readerCardRepository;
 	SubscriberRepository subscriberRepository;
-	std::vector<Workman> staff;
-	BookRepository bookRepository;
+	WorkmanRepository workmanRepository;
 public:
 
 	void PrintBooks()

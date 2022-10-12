@@ -6,16 +6,13 @@ class BookRepository
 {
 private:
 	std::vector<Book> books;
-public:
-	Book Object(int id)
-	{
-		for (auto book : books)
-			if (book.id == id)
-				return book;
-	}
 
-	std::vector<Book> Collection()
-	{
-		return books;
-	}
+	void Build();
+
+public:
+	BookRepository();
+
+	Book Object(int id);
+
+	std::vector<Book> Collection();
 };

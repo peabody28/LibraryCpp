@@ -4,19 +4,9 @@
 static class StringHelper
 {
 public:
-	static std::string ToString(int num)
-	{
-		char* n = new char[9];
-		n += 8;
-		*n = '\0';
-		n--;
+	static std::string ToString(int num);
 
-		while (num != 0)
-		{
-			*n-- = num % 10;
-			num /= 10;
-		}
+	static int ToInt(std::string s);
 
-		return std::string(n);
-	}
+	static bool ToBool(std::string s);
 };

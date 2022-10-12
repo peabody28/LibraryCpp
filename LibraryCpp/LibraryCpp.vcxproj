@@ -128,21 +128,32 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Assistant.h" />
+    <ClCompile Include="Book.cpp" />
     <ClCompile Include="Book.h" />
+    <ClCompile Include="BookRepository.cpp" />
+    <ClCompile Include="DateTime.cpp" />
     <ClCompile Include="DateTime.h" />
+    <ClCompile Include="DateTimeHelper.cpp" />
     <ClCompile Include="DateTimeHelper.h" />
     <ClCompile Include="Director.h" />
+    <ClCompile Include="Exception.cpp" />
+    <ClCompile Include="FileHelper.cpp" />
+    <ClCompile Include="JsonHelper.cpp" />
+    <ClCompile Include="JsonHelper.h" />
     <ClCompile Include="Library.h" />
     <ClCompile Include="LibraryCpp.cpp" />
     <ClCompile Include="Manager.h" />
+    <ClCompile Include="PermissionDeniedException.cpp" />
     <ClCompile Include="ReaderCard.h" />
     <ClCompile Include="Row.h" />
     <ClCompile Include="ReaderCardRepository.h" />
+    <ClCompile Include="StringHelper.cpp" />
     <ClCompile Include="Workman.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BookRepository.h" />
     <ClInclude Include="Exception.h" />
+    <ClInclude Include="FileHelper.h" />
     <ClInclude Include="PermissionDeniedException.h" />
     <ClInclude Include="RowRepository.h" />
     <ClInclude Include="StringHelper.h" />
@@ -150,6 +161,10 @@
     <ClInclude Include="SubscriberRepository.h" />
     <ClInclude Include="WorkmanRepository.h" />
     <ClInclude Include="WorkmanType.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="books.json" />
+    <None Include="rows.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -25,6 +25,11 @@ public:
 
 	void Delete(Subscriber subscriber)
 	{
-
+		for (int i = 0; i < subscribers.size(); i++)
+			if (subscribers[i].id == subscriber.id)
+			{
+				subscribers.erase(subscribers.begin() + i);
+				return;
+			}
 	}
 };
