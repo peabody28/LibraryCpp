@@ -76,6 +76,12 @@
     <Filter Include="Source Files\Book\Repositories">
       <UniqueIdentifier>{fecf22e0-a71d-4ce6-9d41-70e11818f232}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ReaderCard\Repositories">
+      <UniqueIdentifier>{b4b13630-d1c8-442d-be7d-07acedc0c1e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Subscriber\Repositories">
+      <UniqueIdentifier>{d953e18c-fb26-4842-806d-5f4e6aa94e57}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LibraryCpp.cpp">
@@ -143,6 +149,24 @@
     </ClCompile>
     <ClCompile Include="StringHelper.cpp">
       <Filter>Source Files\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="ReaderCardRepository.cpp">
+      <Filter>Source Files\ReaderCard\Repositories</Filter>
+    </ClCompile>
+    <ClCompile Include="RowRepository.cpp">
+      <Filter>Source Files\ReaderCard\Repositories</Filter>
+    </ClCompile>
+    <ClCompile Include="ReaderCard.cpp">
+      <Filter>Source Files\ReaderCard</Filter>
+    </ClCompile>
+    <ClCompile Include="Row.cpp">
+      <Filter>Source Files\ReaderCard</Filter>
+    </ClCompile>
+    <ClCompile Include="Subscriber.cpp">
+      <Filter>Source Files\Subscriber</Filter>
+    </ClCompile>
+    <ClCompile Include="SubscriberRepository.cpp">
+      <Filter>Source Files\Subscriber\Repositories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

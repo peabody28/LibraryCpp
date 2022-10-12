@@ -1,10 +1,8 @@
 #pragma once
 #include "Subscriber.h"
 #include <vector>
-#include <ctime>
 #include "Row.h"
 #include "SubscriberRepository.h"
-#include "DateTimeHelper.h"
 #include "RowRepository.h"
 
 class ReaderCard
@@ -16,26 +14,11 @@ public:
 	Subscriber subscriber;
 	bool isBlocked;
 
-	ReaderCard(Subscriber sub)
-	{
-		subscriber = sub;
-		isBlocked = false;
-	}
+	ReaderCard(Subscriber sub);
 
-	void AddRow(Book book)
-	{
-		DateTime now = DateTimeHelper::Now();
-		Row r = Row(book, now, DateTimeHelper::AddMonth(now));
-		rowRepository.Create(r);
-	}
+	void AddRow(Book book);
 
-	std::vector<Row> Rows()
-	{
-		return rowRepository.Collection();
-	}
+	std::vector<Row> Rows();
 
-	void SwitchIsBlocked()
-	{
-		isBlocked = !isBlocked;
-	}
+	void SwitchIsBlocked();
 };

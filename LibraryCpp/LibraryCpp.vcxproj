@@ -144,10 +144,16 @@
     <ClCompile Include="LibraryCpp.cpp" />
     <ClCompile Include="Manager.h" />
     <ClCompile Include="PermissionDeniedException.cpp" />
+    <ClCompile Include="ReaderCard.cpp" />
     <ClCompile Include="ReaderCard.h" />
+    <ClCompile Include="ReaderCardRepository.cpp" />
+    <ClCompile Include="Row.cpp" />
     <ClCompile Include="Row.h" />
     <ClCompile Include="ReaderCardRepository.h" />
+    <ClCompile Include="RowRepository.cpp" />
     <ClCompile Include="StringHelper.cpp" />
+    <ClCompile Include="Subscriber.cpp" />
+    <ClCompile Include="SubscriberRepository.cpp" />
     <ClCompile Include="Workman.h" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,5 @@
 #pragma once
 #include <string>
-#include <iostream>
-#include "StringHelper.h"
 
 class Subscriber
 {
@@ -11,13 +9,9 @@ private:
 	std::string name;
 public:
 
-	Subscriber()
-	{
-		Id = 1;
-		id = Id;
-	}
+	Subscriber();
 
-	Subscriber(std::string _name) { name = _name; id = Id; }
+	Subscriber(std::string _name);
 
 	friend class SubscriberRepository;
 	friend class ReaderCardRepository;

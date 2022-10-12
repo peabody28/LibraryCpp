@@ -1,9 +1,10 @@
+#include "Subscriber.h"
 
-namespace asd
+int Subscriber::Id = 1;
+
+Subscriber::Subscriber()
 {
-	class Subscriber
-	{
-	private:
-		int id;
-	};
+	id = Id;
 }
+
+Subscriber::Subscriber(std::string _name) { name = _name; id = Id; }

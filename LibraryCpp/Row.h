@@ -2,7 +2,6 @@
 #include "DateTime.h"
 #include "Book.h"
 #include "BookRepository.h"
-#include "DateTimeHelper.h"
 
 class Row
 {
@@ -16,27 +15,9 @@ public:
 	DateTime dateTo;
 	bool isReturned;
 
-	Row(Book _book, DateTime from, DateTime to)
-	{
-		Id = 1;
-		id = Id;
-		book = _book;
-		dateFrom = from;
-		dateTo = to;
-		isReturned = false;
-	}
+	Row(Book _book, DateTime from, DateTime to);
 
-	Row(int _id, int _bookId, DateTime from, DateTime to, bool _isRet)
-	{
-		id =  _id;
-		book = bookRepository.Object(_bookId);
-		dateFrom = from;
-		dateTo = to;
-		isReturned = _isRet;
-	}
+	Row(int _id, int _bookId, DateTime from, DateTime to, bool _isRet);
 
-	bool IsExpired()
-	{
-		return DateTimeHelper::Compare(DateTimeHelper::Now(), dateTo) == 1;
-	}
+	bool IsExpired();
 };
