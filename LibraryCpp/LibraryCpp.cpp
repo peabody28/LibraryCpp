@@ -1,6 +1,6 @@
 #include <iostream>
-#include "Book.h"
 #include "Row.h"
+#include "Book.h"
 #include "ReaderCard.h"
 #include "Subscriber.h"
 #include "BookRepository.h"
@@ -18,6 +18,8 @@
 #include "PermissionDeniedException.h"
 #include "Exception.h"
 #define PERMISSION_DENIED_FOR_THIS_ACTION "PERMISSION_DENIED_FOR_THIS_ACTION"
+
+#pragma region ReaderCard
 
 // ReaderCard
 ReaderCard::ReaderCard() {}
@@ -55,6 +57,9 @@ void ReaderCard::SwitchIsBlocked()
 	isBlocked = !isBlocked;
 }
 
+#pragma endregion ReaderCard
+
+#pragma region ReaderCardRepository
 
 //ReaderCardRepository
 ReaderCardRepository* ReaderCardRepository::obj = nullptr;
@@ -139,6 +144,9 @@ void ReaderCardRepository::AddRow(Subscriber subscriber, Book book)
 		}
 }
 
+#pragma endregion ReaderCardRepository
+
+#pragma region Row
 
 // Row
 Row::Row() {
@@ -171,8 +179,10 @@ bool Row::IsExpired()
 	return DateTimeHelper::Compare(DateTimeHelper::Now(), dateTo) == 1;
 }
 
+#pragma endregion Row
 
-// RowRepository
+#pragma region RowRepository
+
 RowRepository* RowRepository::obj = nullptr;
 
 void RowRepository::Build()
@@ -223,6 +233,9 @@ std::vector<Row*> RowRepository::Collection()
 	return rows;
 }
 
+#pragma endregion RowRepository
+
+#pragma region Subscriber
 
 // Subcsriber
 Subscriber::Subscriber()
@@ -234,6 +247,9 @@ Subscriber::Subscriber(std::string _name) { name = _name; }
 
 Subscriber::Subscriber(int _id, std::string _name) { name = _name; id = _id; }
 
+#pragma endregion Subscriber
+
+#pragma region SubscriberRepository
 
 // SubscriberRepository
 SubscriberRepository* SubscriberRepository::obj = nullptr;
@@ -293,6 +309,9 @@ void SubscriberRepository::Delete(Subscriber subscriber)
 		}
 }
 
+#pragma endregion SubscriberRepository
+
+#pragma region StringHelper
 
 // StringHelper
 std::string StringHelper::ToString(int num)
@@ -330,6 +349,10 @@ bool StringHelper::ToBool(std::string s)
 {
 	return s.compare("false");
 }
+
+#pragma endregion StringHelper
+
+#pragma region JsonHelper
 
 // JsonHelper
 std::vector<std::map<std::string, std::string>> JsonHelper::Parse(std::string json)
@@ -394,6 +417,9 @@ std::vector<std::map<std::string, std::string>> JsonHelper::Parse(std::string js
 	return objs;
 }
 
+#pragma endregion JsonHelper
+
+#pragma region FileHelper
 
 // FileHelper
 std::string FileHelper::Read(std::ifstream* f)
@@ -407,6 +433,9 @@ std::string FileHelper::Read(std::ifstream* f)
 	return buffer;
 }
 
+#pragma endregion FileHelper
+
+#pragma region DateTimeHelper
 
 // DateTimeHelper
 int DateTimeHelper::Compare(DateTime a, DateTime b)
@@ -474,6 +503,9 @@ DateTime DateTimeHelper::Parse(std::string s)
 
 }
 
+#pragma endregion DateTimeHelper
+
+#pragma region Exception
 
 //Exception
 PermissionDeniedException::PermissionDeniedException() : Exception(PERMISSION_DENIED_FOR_THIS_ACTION)
@@ -483,8 +515,10 @@ PermissionDeniedException::PermissionDeniedException() : Exception(PERMISSION_DE
 
 Exception::Exception(std::string _msg) { msg = _msg; }
 
+#pragma endregion Exception
 
-// DateTime
+#pragma region DateTime
+
 DateTime::DateTime()
 {
 
@@ -497,8 +531,10 @@ DateTime::DateTime(int _d, int _m, int _y)
 	year = _y;
 }
 
+#pragma endregion DateTime
 
-// Book
+#pragma region Book
+
 Book::Book()
 {
 
@@ -511,7 +547,10 @@ Book::Book(int _id, std::string _title, std::string _author)
 	author = _author;
 }
 
+#pragma region Book
 
+
+#pragma region BookRepository
 // BookRepository
 BookRepository* BookRepository::obj = nullptr;
 
@@ -557,6 +596,8 @@ std::vector<Book> BookRepository::Collection()
 {
 	return books;
 }
+
+#pragma endregion BookRepository
 
 
 int main()
