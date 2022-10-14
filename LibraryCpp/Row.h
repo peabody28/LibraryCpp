@@ -2,16 +2,18 @@
 #include "BookRepository.h"
 #include "DateTime.h"
 #include "Book.h"
+#include "ReaderCardRepository.h"
+#include "ReaderCard.h"
 
 class Row
 {
 private:
-	int Id;
-	BookRepository bookRepository;
+	BookRepository* bookRepository;
+	ReaderCardRepository* readerCardRepository;
 public:
 	int id;
 	Book book;
-	int readerCardId;
+	ReaderCard readerCard;
 	DateTime dateFrom;
 	DateTime dateTo;
 	bool isReturned;

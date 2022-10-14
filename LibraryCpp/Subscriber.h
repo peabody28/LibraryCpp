@@ -5,7 +5,6 @@
 class Subscriber
 {
 private:
-	int Id;
 	std::string name;
 public:
 	int id;

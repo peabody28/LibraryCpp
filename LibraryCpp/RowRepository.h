@@ -1,19 +1,24 @@
 #pragma once
 #include <vector>
-#include "Row.h"
+
+class Row;
 
 class RowRepository
 {
 private:
-	std::vector<Row> rows;
+	static RowRepository* obj;
+	std::vector<Row*> rows;
 
 	void Build();
-public:
+	
 	RowRepository();
+public:
+
+	static RowRepository* GetInstance();
 
 	Row Object(int rowId);
 
-	void Create(Row r);
+	void Create(Row* r);
 
-	std::vector<Row> Collection();
+	std::vector<Row*> Collection();
 };

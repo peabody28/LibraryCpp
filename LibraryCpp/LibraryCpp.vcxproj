@@ -128,28 +128,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Assistant.h" />
-    <ClCompile Include="Book.cpp" />
     <ClCompile Include="Book.h" />
-    <ClCompile Include="BookRepository.cpp" />
-    <ClCompile Include="DateTime.cpp" />
     <ClCompile Include="DateTime.h" />
-    <ClCompile Include="DateTimeHelper.cpp" />
     <ClCompile Include="DateTimeHelper.h" />
     <ClCompile Include="Director.h" />
-    <ClCompile Include="Exception.cpp" />
-    <ClCompile Include="FileHelper.cpp" />
-    <ClCompile Include="JsonHelper.cpp" />
     <ClCompile Include="JsonHelper.h" />
     <ClCompile Include="Library.h" />
     <ClCompile Include="LibraryCpp.cpp" />
     <ClCompile Include="Manager.h" />
-    <ClCompile Include="PermissionDeniedException.cpp" />
-    <ClCompile Include="Row.cpp" />
     <ClCompile Include="Row.h" />
-    <ClCompile Include="RowRepository.cpp" />
-    <ClCompile Include="StringHelper.cpp" />
-    <ClCompile Include="Subscriber.cpp" />
-    <ClCompile Include="SubscriberRepository.cpp" />
     <ClCompile Include="Workman.h" />
     <ClCompile Include="WorkmanRepository.cpp" />
   </ItemGroup>
@@ -158,6 +145,8 @@
     <ClInclude Include="Exception.h" />
     <ClInclude Include="FileHelper.h" />
     <ClInclude Include="PermissionDeniedException.h" />
+    <ClInclude Include="ReaderCard.h" />
+    <ClInclude Include="ReaderCardRepository.h" />
     <ClInclude Include="RowRepository.h" />
     <ClInclude Include="StringHelper.h" />
     <ClInclude Include="Subscriber.h" />

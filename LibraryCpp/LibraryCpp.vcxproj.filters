@@ -49,38 +49,11 @@
     <Filter Include="Header Files\ReaderCard\Repositories">
       <UniqueIdentifier>{f47e1f84-b7cf-4ab7-9a57-9cf11298c3a3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Book">
-      <UniqueIdentifier>{4838e12a-7392-4787-9f27-250ae3b71d77}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\DateTime">
-      <UniqueIdentifier>{522466b2-b5ae-4f48-8e18-5fdf9387cf3e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Exception">
-      <UniqueIdentifier>{d1487229-826f-4a60-85c3-e247c125c07d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Helpers">
-      <UniqueIdentifier>{cda78fb1-a9c9-4d13-a205-da14beb1816d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Library">
-      <UniqueIdentifier>{9720644d-18ca-42b4-bd48-07b92f35bf33}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\ReaderCard">
       <UniqueIdentifier>{25660434-e281-498e-a9b3-4598bad2ec48}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Subscriber">
-      <UniqueIdentifier>{8fa5fb2b-a875-4d77-aa17-196f5f74d647}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Workman">
       <UniqueIdentifier>{869fb145-53c4-4ff6-b816-0c3c995df7a4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Book\Repositories">
-      <UniqueIdentifier>{fecf22e0-a71d-4ce6-9d41-70e11818f232}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\ReaderCard\Repositories">
-      <UniqueIdentifier>{b4b13630-d1c8-442d-be7d-07acedc0c1e2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Subscriber\Repositories">
-      <UniqueIdentifier>{d953e18c-fb26-4842-806d-5f4e6aa94e57}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Workman\Repositories">
       <UniqueIdentifier>{14bc16e1-2cd7-4cf4-a1a1-48526f34daf5}</UniqueIdentifier>
@@ -120,45 +93,6 @@
     <ClCompile Include="JsonHelper.h">
       <Filter>Header Files\Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="Book.cpp">
-      <Filter>Source Files\Book</Filter>
-    </ClCompile>
-    <ClCompile Include="BookRepository.cpp">
-      <Filter>Source Files\Book\Repositories</Filter>
-    </ClCompile>
-    <ClCompile Include="DateTime.cpp">
-      <Filter>Source Files\DateTime</Filter>
-    </ClCompile>
-    <ClCompile Include="Exception.cpp">
-      <Filter>Source Files\Exception</Filter>
-    </ClCompile>
-    <ClCompile Include="PermissionDeniedException.cpp">
-      <Filter>Source Files\Exception</Filter>
-    </ClCompile>
-    <ClCompile Include="DateTimeHelper.cpp">
-      <Filter>Source Files\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="FileHelper.cpp">
-      <Filter>Source Files\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="JsonHelper.cpp">
-      <Filter>Source Files\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="StringHelper.cpp">
-      <Filter>Source Files\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="RowRepository.cpp">
-      <Filter>Source Files\ReaderCard\Repositories</Filter>
-    </ClCompile>
-    <ClCompile Include="Row.cpp">
-      <Filter>Source Files\ReaderCard</Filter>
-    </ClCompile>
-    <ClCompile Include="Subscriber.cpp">
-      <Filter>Source Files\Subscriber</Filter>
-    </ClCompile>
-    <ClCompile Include="SubscriberRepository.cpp">
-      <Filter>Source Files\Subscriber\Repositories</Filter>
-    </ClCompile>
     <ClCompile Include="WorkmanRepository.cpp">
       <Filter>Source Files\Workman\Repositories</Filter>
     </ClCompile>
@@ -193,6 +127,12 @@
     </ClInclude>
     <ClInclude Include="FileHelper.h">
       <Filter>Header Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="ReaderCard.h">
+      <Filter>Header Files\ReaderCard</Filter>
+    </ClInclude>
+    <ClInclude Include="ReaderCardRepository.h">
+      <Filter>Header Files\ReaderCard\Repositories</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

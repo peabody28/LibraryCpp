@@ -1,16 +1,21 @@
 #pragma once
-#include "Subscriber.h"
 #include <vector>
 #include <string>
+
+class Subscriber;
 
 class SubscriberRepository
 {
 private:
-	std::vector<Subscriber> subscribers;
+	static SubscriberRepository* obj;
+	std::vector<Subscriber*> subscribers;
 
 	void Build();
-public:
+
 	SubscriberRepository();
+
+public:
+	static SubscriberRepository* GetInstance();
 
 	Subscriber Object(int id);
 

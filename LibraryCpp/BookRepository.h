@@ -9,8 +9,13 @@ private:
 
 	void Build();
 
-public:
 	BookRepository();
+
+	static BookRepository* obj;
+
+public:
+
+	static BookRepository* GetInstance();
 
 	Book Object(int id);
 

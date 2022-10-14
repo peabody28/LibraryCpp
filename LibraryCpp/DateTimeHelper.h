@@ -1,6 +1,7 @@
 #pragma once
-#include "DateTime.h"
 #include <string>
+
+class DateTime;
 
 class DateTimeHelper
 {
