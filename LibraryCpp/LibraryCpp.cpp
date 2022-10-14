@@ -1,32 +1,83 @@
-#include <iostream>
-#include "Row.h"
+#include "DateTime.h"
 #include "Book.h"
+#include "Row.h"
 #include "ReaderCard.h"
 #include "Subscriber.h"
+
+#include "WorkmanResolveOperation.h"
+
 #include "BookRepository.h"
 #include "RowRepository.h"
 #include "SubscriberRepository.h"
 #include "ReaderCardRepository.h"
+#include "WorkmanRepository.h"
+
+#include "WorkmanTypeHelper.h"
+#include "DateTimeHelper.h"
 #include "StringHelper.h"
 #include "FileHelper.h"
 #include "JsonHelper.h"
+
+#include "PermissionDeniedException.h"
+#include "Exception.h"
+
+#include "Assistant.h"
+#include "Manager.h"
+#include "Director.h"
+
+#include "Library.h"
+
+#include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
-#include "DateTime.h"
-#include "DateTimeHelper.h"
-#include "PermissionDeniedException.h"
-#include "Exception.h"
+
 #define PERMISSION_DENIED_FOR_THIS_ACTION "PERMISSION_DENIED_FOR_THIS_ACTION"
+
+std::ostream& operator << (std::ostream& os, const DateTime& d)
+{
+	return os << d.day << " " << d.month << " " << d.year;
+}
+
+std::ostream& operator << (std::ostream& os, const Subscriber& s)
+{
+	return os << s.id << " " << s.name;
+}
+
+std::ostream& operator << (std::ostream& os, const Book& s)
+{
+	return os << s.id << " " << s.author << " " << s.title;
+}
+
+#pragma region Book
+
+Book::Book()
+{
+
+}
+
+Book::Book(int _id, std::string _title, std::string _author)
+{
+	id = _id;
+	title = _title;
+	author = _author;
+}
+
+#pragma endregion Book
 
 #pragma region ReaderCard
 
-// ReaderCard
-ReaderCard::ReaderCard() {}
+ReaderCard::ReaderCard() {
+	subscriberRepository = SubscriberRepository::GetInstance();
+	rowRepository = RowRepository::GetInstance();
+}
 
-ReaderCard::ReaderCard(Subscriber sub)
+ReaderCard::ReaderCard(Subscriber* sub)
 {
-	subscriber = sub;
+	subscriberRepository = SubscriberRepository::GetInstance();
+	rowRepository = RowRepository::GetInstance();
+
+	subscriberId = sub->id;
 	isBlocked = false;
 }
 
@@ -36,20 +87,25 @@ ReaderCard::ReaderCard(int _id, int _subscriberId, bool _isBlocked)
 	rowRepository = RowRepository::GetInstance();
 
 	id = _id;
-	subscriber = subscriberRepository->Object(_subscriberId);
+	subscriberId =_subscriberId;
 	isBlocked = _isBlocked;
 }
 
-void ReaderCard::AddRow(Book book)
+Subscriber* ReaderCard::_Subscriber()
+{
+	return subscriberRepository->Object(subscriberId);
+}
+
+void ReaderCard::AddRow(Book* book)
 {
 	DateTime now = DateTimeHelper::Now();
-	Row* r = new Row(book, now, DateTimeHelper::AddMonth(now));
+	Row* r = new Row(book, this, now, DateTimeHelper::AddMonth(now));
 	rowRepository->Create(r);
 }
 
-std::vector<Row*> ReaderCard::Rows()
+std::vector<Row*> ReaderCard::Rows(ReaderCard* readerCard)
 {
-	return rowRepository->Collection();
+	return rowRepository->Collection(readerCard->id);
 }
 
 void ReaderCard::SwitchIsBlocked()
@@ -61,7 +117,6 @@ void ReaderCard::SwitchIsBlocked()
 
 #pragma region ReaderCardRepository
 
-//ReaderCardRepository
 ReaderCardRepository* ReaderCardRepository::obj = nullptr;
 
 void ReaderCardRepository::Build()
@@ -91,22 +146,23 @@ ReaderCardRepository* ReaderCardRepository::GetInstance()
 {
 	if (obj == nullptr)
 		return new ReaderCardRepository();
-	else
-		return obj;
+	return obj;
 }
 
-ReaderCard ReaderCardRepository::Object(Subscriber subscriber)
+ReaderCard* ReaderCardRepository::Object(Subscriber* subscriber)
 {
 	for (auto card : readerCards)
-		if (card->subscriber.id == subscriber.id)
-			return *card;
+		if (card->_Subscriber()->id == subscriber->id)
+			return card;
+	return NULL;
 }
 
-ReaderCard ReaderCardRepository::Object(int subscriberId)
+ReaderCard* ReaderCardRepository::Object(int subscriberId)
 {
 	for (auto card : readerCards)
-		if (card->subscriber.id == subscriberId)
-			return *card;
+		if (card->_Subscriber()->id == subscriberId)
+			return card;
+	return NULL;
 }
 
 std::vector<ReaderCard*> ReaderCardRepository::Collection()
@@ -114,19 +170,19 @@ std::vector<ReaderCard*> ReaderCardRepository::Collection()
 	return readerCards;
 }
 
-ReaderCard ReaderCardRepository::Create(std::string username)
+ReaderCard* ReaderCardRepository::Create(std::string username)
 {
-	Subscriber s = subscriberRepository->Create(username);
+	Subscriber* s = subscriberRepository->Create(username);
 	ReaderCard *c = new ReaderCard(s);
 	readerCards.push_back(c);
 
-	return *c;
+	return c;
 }
 
-void ReaderCardRepository::Delete(Subscriber subscriber)
+void ReaderCardRepository::Delete(Subscriber* subscriber)
 {
 	for (int i = 0; i < readerCards.size(); i++)
-		if (readerCards[i]->subscriber.id == subscriber.id)
+		if (readerCards[i]->_Subscriber()->id == subscriber->id)
 		{
 			readerCards.erase(readerCards.begin() + i);
 			subscriberRepository->Delete(subscriber);
@@ -134,10 +190,10 @@ void ReaderCardRepository::Delete(Subscriber subscriber)
 		}
 }
 
-void ReaderCardRepository::AddRow(Subscriber subscriber, Book book)
+void ReaderCardRepository::AddRow(Subscriber* subscriber, Book* book)
 {
 	for (auto card : readerCards)
-		if (card->subscriber.id == subscriber.id)
+		if (card->_Subscriber()->id == subscriber->id)
 		{
 			card->AddRow(book);
 			break;
@@ -148,16 +204,20 @@ void ReaderCardRepository::AddRow(Subscriber subscriber, Book book)
 
 #pragma region Row
 
-// Row
 Row::Row() {
-	
+	bookRepository = BookRepository::GetInstance();
+	readerCardRepository = ReaderCardRepository::GetInstance();
 }
 
-Row::Row(Book _book, DateTime from, DateTime to)
+Row::Row(Book* book, ReaderCard* readerCard, DateTime f, DateTime t)
 {
-	book = _book;
-	dateFrom = from;
-	dateTo = to;
+	bookRepository = BookRepository::GetInstance();
+	readerCardRepository = ReaderCardRepository::GetInstance();
+
+	bookId = book->id;
+	readerCardId = readerCard->id;
+	dateFrom = f;
+	dateTo = t;
 	isReturned = false;
 }
 
@@ -167,11 +227,21 @@ Row::Row(int _id, int _bookId, int _readerCardId, DateTime from, DateTime to, bo
 	readerCardRepository = ReaderCardRepository::GetInstance();
 
 	id = _id;
-	book = bookRepository->Object(_bookId);
-	readerCard = readerCardRepository->Object(_readerCardId);
+	bookId = _bookId;
+	readerCardId = _readerCardId;
 	dateFrom = from;
 	dateTo = to;
 	isReturned = _isRet;
+}
+
+Book* Row::_Book()
+{
+	return bookRepository->Object(bookId);
+}
+
+ReaderCard* Row::_ReaderCard()
+{
+	return readerCardRepository->Object(readerCardId);
 }
 
 bool Row::IsExpired()
@@ -212,15 +282,15 @@ RowRepository* RowRepository::GetInstance()
 {
 	if (obj == nullptr)
 		return new RowRepository();
-	else
-		return obj;
+	return obj;
 }
 
-Row RowRepository::Object(int rowId)
+Row* RowRepository::Object(int rowId)
 {
 	for (auto row : rows)
 		if (row->id == rowId)
-			return *row;
+			return row;
+	return NULL;
 }
 
 void RowRepository::Create(Row* r)
@@ -228,16 +298,19 @@ void RowRepository::Create(Row* r)
 	rows.push_back(r);
 }
 
-std::vector<Row*> RowRepository::Collection()
+std::vector<Row*> RowRepository::Collection(int readerCardId)
 {
-	return rows;
+	std::vector<Row*> collection;
+	for (auto item : rows)
+		if (item->readerCardId == readerCardId)
+			collection.push_back(item);
+	return collection;
 }
 
 #pragma endregion RowRepository
 
 #pragma region Subscriber
 
-// Subcsriber
 Subscriber::Subscriber()
 {
 
@@ -251,7 +324,6 @@ Subscriber::Subscriber(int _id, std::string _name) { name = _name; id = _id; }
 
 #pragma region SubscriberRepository
 
-// SubscriberRepository
 SubscriberRepository* SubscriberRepository::obj = nullptr;
 
 void SubscriberRepository::Build()
@@ -281,28 +353,28 @@ SubscriberRepository* SubscriberRepository::GetInstance()
 {
 	if (obj == NULL)
 		return new SubscriberRepository();
-	else
-		return obj;
+	return obj;
 }
 
-Subscriber SubscriberRepository::Object(int id)
+Subscriber* SubscriberRepository::Object(int id)
 {
 	for (auto sub : subscribers)
 		if (sub->id == id)
-			return *sub;
+			return sub;
+	return NULL;
 }
 
-Subscriber SubscriberRepository::Create(std::string name)
+Subscriber* SubscriberRepository::Create(std::string name)
 {
 	Subscriber *s = new Subscriber(name);
 	subscribers.push_back(s);
-	return *s;
+	return s;
 }
 
-void SubscriberRepository::Delete(Subscriber subscriber)
+void SubscriberRepository::Delete(Subscriber* subscriber)
 {
 	for (int i = 0; i < subscribers.size(); i++)
-		if (subscribers[i]->id == subscriber.id)
+		if (subscribers[i]->id == subscriber->id)
 		{
 			subscribers.erase(subscribers.begin() + i);
 			return;
@@ -313,7 +385,6 @@ void SubscriberRepository::Delete(Subscriber subscriber)
 
 #pragma region StringHelper
 
-// StringHelper
 std::string StringHelper::ToString(int num)
 {
 	char* n = new char[9];
@@ -354,7 +425,6 @@ bool StringHelper::ToBool(std::string s)
 
 #pragma region JsonHelper
 
-// JsonHelper
 std::vector<std::map<std::string, std::string>> JsonHelper::Parse(std::string json)
 {
 	std::vector<std::map<std::string, std::string>> objs;
@@ -421,7 +491,6 @@ std::vector<std::map<std::string, std::string>> JsonHelper::Parse(std::string js
 
 #pragma region FileHelper
 
-// FileHelper
 std::string FileHelper::Read(std::ifstream* f)
 {
 	f->seekg(0, std::ios::end);
@@ -437,7 +506,6 @@ std::string FileHelper::Read(std::ifstream* f)
 
 #pragma region DateTimeHelper
 
-// DateTimeHelper
 int DateTimeHelper::Compare(DateTime a, DateTime b)
 {
 	if (a.year > b.year)
@@ -470,7 +538,7 @@ DateTime DateTimeHelper::Now()
 {
 	std::time_t t = std::time(0);
 	std::tm* now = std::localtime(&t);
-	return DateTime(now->tm_mday, now->tm_mon, now->tm_year);
+	return DateTime(now->tm_mday, now->tm_mon, now->tm_year+1900);
 }
 
 DateTime DateTimeHelper::Parse(std::string s)
@@ -507,7 +575,6 @@ DateTime DateTimeHelper::Parse(std::string s)
 
 #pragma region Exception
 
-//Exception
 PermissionDeniedException::PermissionDeniedException() : Exception(PERMISSION_DENIED_FOR_THIS_ACTION)
 {
 
@@ -533,25 +600,8 @@ DateTime::DateTime(int _d, int _m, int _y)
 
 #pragma endregion DateTime
 
-#pragma region Book
-
-Book::Book()
-{
-
-}
-
-Book::Book(int _id, std::string _title, std::string _author)
-{
-	id = _id;
-	title = _title;
-	author = _author;
-}
-
-#pragma region Book
-
-
 #pragma region BookRepository
-// BookRepository
+
 BookRepository* BookRepository::obj = nullptr;
 
 void BookRepository::Build()
@@ -564,7 +614,7 @@ void BookRepository::Build()
 
 	for (auto row : collection)
 	{
-		Book tmp = Book(StringHelper::ToInt(row["id"]), row["title"], row["author"]);
+		Book* tmp = new Book(StringHelper::ToInt(row["id"]), row["title"], row["author"]);
 		books.push_back(tmp);
 	}
 
@@ -581,30 +631,227 @@ BookRepository* BookRepository::GetInstance()
 {
 	if (obj == nullptr)
 		return new BookRepository();
-	else
-		return obj;
+	return obj;
 }
 
-Book BookRepository::Object(int id)
+Book* BookRepository::Object(int id)
 {
 	for (auto book : books)
-		if (book.id == id)
+		if (book->id == id)
 			return book;
+	return NULL;
 }
 
-std::vector<Book> BookRepository::Collection()
+std::vector<Book*> BookRepository::Collection()
 {
 	return books;
 }
 
 #pragma endregion BookRepository
 
+#pragma region WormanTypeHelper
+
+WorkmanType WorkmanTypeHelper::Parse(std::string type)
+{
+	if (!type.compare("Assistant"))
+		return WorkmanType::Assistant;
+	else if (!type.compare("Director"))
+		return WorkmanType::Director;
+	else if (!type.compare("Manager"))
+		return WorkmanType::Manager;
+
+	return WorkmanType::Assistant;
+}
+
+#pragma endregion WorkmanTypeHelper
+
+#pragma region WorkmanRepository
+
+WorkmanRepository* WorkmanRepository::obj = nullptr;
+
+void WorkmanRepository::Build()
+{
+	std::ifstream f("workmans.json");
+
+	std::string json = FileHelper::Read(&f);
+
+	auto collection = JsonHelper::Parse(json);
+
+	for (auto row : collection)
+	{
+		Workman* tmp = WorkmanResolveOperation::Resolve(WorkmanTypeHelper::Parse(row["type"]));
+		tmp->id = StringHelper::ToInt(row["id"]);
+		staff.push_back(tmp);
+	}
+	f.close();
+}
+
+WorkmanRepository::WorkmanRepository() 
+{
+	obj = this;
+	Build();
+}
+
+WorkmanRepository* WorkmanRepository::GetInstance()
+{
+	if (obj == nullptr)
+		return new WorkmanRepository();
+	return obj;
+}
+
+Workman* WorkmanRepository::Object(int _id)
+{
+	for (auto man : staff)
+		if (man->id == _id)
+			return man;
+	return NULL;
+}
+
+#pragma endregion WorkmanRepository
+
+#pragma region Library
+
+Library::Library()
+{
+	bookRepository = BookRepository::GetInstance();
+	subscriberRepository = SubscriberRepository::GetInstance();
+	readerCardRepository = ReaderCardRepository::GetInstance();
+	workmanRepository = WorkmanRepository::GetInstance();
+}
+
+void Library::PrintBooks()
+{
+	for (auto book : bookRepository->Collection())
+		std::cout << *book << std::endl;
+}
+
+void Library::PrintSubscribers()
+{
+	for (auto card : readerCardRepository->Collection())
+		std::cout << *(card->_Subscriber()) << std::endl;
+}
+
+void Library::PrintBooks(int _subscriberId)
+{
+	for (auto card : readerCardRepository->Collection())
+		if (card->_Subscriber()->id == _subscriberId)
+		{
+			for (auto row : card->Rows(card))
+				std::cout << *(row->_Book()) << " " << "dateFrom: " << row->dateFrom << " DateTo: " << row->dateTo << std::endl;
+			break;
+		}
+}
+
+void Library::Debts()
+{
+	for (auto card : readerCardRepository->Collection())
+		for (auto row : card->Rows(card))
+		{
+			if (row->IsExpired())
+				std::cout << *(card->_Subscriber()) << " " << *(row->_Book()) << " " << "dateFrom: " << row->dateFrom << " DateTo: " << row->dateTo << std::endl;
+		}
+}
+
+ReaderCard* Library::AddSubcriber(std::string username)
+{
+	return readerCardRepository->Create(username);
+}
+
+void Library::SwitchSubscriberState(std::string name, Workman workman)
+{
+	if (workman.type != Manager && workman.type != Director)
+		throw PermissionDeniedException();
+
+	for (auto card : readerCardRepository->Collection())
+		if (!card->_Subscriber()->name.compare(name))
+		{
+			card->SwitchIsBlocked();
+			break;
+		}
+}
+
+void Library::DeleteSubscriber(std::string name, Workman workman)
+{
+	if (workman.type != Director)
+		throw PermissionDeniedException();
+
+	for (auto card : readerCardRepository->Collection())
+		if (!card->_Subscriber()->name.compare(name))
+		{
+			readerCardRepository->Delete(card->_Subscriber());
+			break;
+		}
+}
+
+void Library::GiveBook(Subscriber* subscriber, Book* book, Workman workman)
+{
+	if (workman.type != Assistant)
+		throw PermissionDeniedException();
+
+	readerCardRepository->AddRow(subscriber, book);
+}
+
+#pragma endregion Library
+
+#pragma region Workman
+
+Workman::Workman()
+{
+
+}
+
+Workman::Workman(WorkmanType w)
+{
+	type = w;
+}
+
+staff::Assistant::Assistant() : Workman(WorkmanType::Assistant) {}
+
+staff::Manager::Manager() : Workman(WorkmanType::Manager)
+{
+
+}
+
+staff::Manager::Manager(WorkmanType w) : Workman(w) { }
+
+staff::Director::Director() : Manager(WorkmanType::Director) {}
+
+#pragma endregion Workman
+
+#pragma region WormanResolveOperation
+
+Workman* WorkmanResolveOperation::Resolve(WorkmanType w)
+{
+	switch (w)
+	{
+	case Assistant:
+		return new staff::Assistant();
+		break;
+	case Manager:
+		return new staff::Manager();
+		break;
+	case Director:
+		return new staff::Director();
+		break;
+	default:
+		return NULL;
+		break;
+	}
+}
+
+#pragma endregion WorkmanResolveOperation
 
 int main()
 {
-	RowRepository* r = RowRepository::GetInstance();
-	ReaderCardRepository* r2 = ReaderCardRepository::GetInstance();
-	SubscriberRepository* sr = SubscriberRepository::GetInstance();
-	BookRepository* br = BookRepository::GetInstance();
+	WorkmanRepository* rr = WorkmanRepository::GetInstance();
+	Library l = Library();
+
+	ReaderCard* rc = l.AddSubcriber("Max");
+	Book* book = l.bookRepository->Object(1);
+	Workman* w = new staff::Assistant();
+
+	l.GiveBook(rc->_Subscriber(), book, *w);
+
+	l.PrintBooks(rc->_Subscriber()->id);
     return 0;
 }

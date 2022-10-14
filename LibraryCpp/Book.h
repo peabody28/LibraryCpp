@@ -4,11 +4,11 @@
 
 class Book
 {
-private:
+public:
 	int id;
 	std::string title;
 	std::string author;
-public:
+
 	Book();
 
 	Book(int _id, std::string _title, std::string _author);

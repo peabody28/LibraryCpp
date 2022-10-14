@@ -138,7 +138,6 @@
     <ClCompile Include="Manager.h" />
     <ClCompile Include="Row.h" />
     <ClCompile Include="Workman.h" />
-    <ClCompile Include="WorkmanRepository.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BookRepository.h" />
@@ -152,7 +151,9 @@
     <ClInclude Include="Subscriber.h" />
     <ClInclude Include="SubscriberRepository.h" />
     <ClInclude Include="WorkmanRepository.h" />
+    <ClInclude Include="WorkmanResolveOperation.h" />
     <ClInclude Include="WorkmanType.h" />
+    <ClInclude Include="WorkmanTypeHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="books.json" />
@@ -160,6 +161,7 @@
     <None Include="reader_cards.json" />
     <None Include="rows.json" />
     <None Include="subscribers.json" />
+    <None Include="workmans.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

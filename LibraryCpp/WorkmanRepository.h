@@ -6,12 +6,15 @@
 class WorkmanRepository
 {
 private:
-	std::vector<Workman> staff;
+	static WorkmanRepository* obj;
+	std::vector<Workman*> staff;
 
 	void Build();
-public:
 
 	WorkmanRepository();
+public:
 
-	Workman ObjectByName(std::string name);
+	static WorkmanRepository* GetInstance();
+
+	Workman* Object(int _workmanId);
 };

@@ -4,11 +4,12 @@
 
 class Workman
 {
-private:
-	std::string name;
 public:
+	int id;
 	WorkmanType type;
 
-	friend class WorkmanRepository;
+	Workman();
+
+	Workman(WorkmanType w);
 };
 

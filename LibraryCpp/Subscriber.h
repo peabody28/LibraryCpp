@@ -4,10 +4,9 @@
 
 class Subscriber
 {
-private:
-	std::string name;
 public:
 	int id;
+	std::string name;
 
 	Subscriber();
 

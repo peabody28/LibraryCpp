@@ -4,6 +4,7 @@
 
 class ReaderCard;
 class Subscriber;
+class Book;
 
 class ReaderCardRepository
 {
@@ -21,15 +22,15 @@ public:
 
 	static ReaderCardRepository* GetInstance();
 
-	ReaderCard Object(Subscriber subscriber);
+	ReaderCard* Object(Subscriber* subscriber);
 
-	ReaderCard Object(int subscriberId);
+	ReaderCard* Object(int subscriberId);
 
 	std::vector<ReaderCard*> Collection();
 
-	ReaderCard Create(std::string username);
+	ReaderCard* Create(std::string username);
 
-	void Delete(Subscriber subscriber);
+	void Delete(Subscriber* subscriber);
 
-	void AddRow(Subscriber subscriber, Book book);
+	void AddRow(Subscriber* subscriber, Book* book);
 };

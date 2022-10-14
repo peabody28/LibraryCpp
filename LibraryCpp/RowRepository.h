@@ -16,9 +16,9 @@ public:
 
 	static RowRepository* GetInstance();
 
-	Row Object(int rowId);
+	Row* Object(int rowId);
 
 	void Create(Row* r);
 
-	std::vector<Row*> Collection();
+	std::vector<Row*> Collection(int readerCardId);
 };

@@ -49,14 +49,8 @@
     <Filter Include="Header Files\ReaderCard\Repositories">
       <UniqueIdentifier>{f47e1f84-b7cf-4ab7-9a57-9cf11298c3a3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\ReaderCard">
-      <UniqueIdentifier>{25660434-e281-498e-a9b3-4598bad2ec48}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Workman">
-      <UniqueIdentifier>{869fb145-53c4-4ff6-b816-0c3c995df7a4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Workman\Repositories">
-      <UniqueIdentifier>{14bc16e1-2cd7-4cf4-a1a1-48526f34daf5}</UniqueIdentifier>
+    <Filter Include="Header Files\Workman\Operations">
+      <UniqueIdentifier>{daae9641-c2b5-4e81-8871-a95b1d730a07}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -92,9 +86,6 @@
     </ClCompile>
     <ClCompile Include="JsonHelper.h">
       <Filter>Header Files\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="WorkmanRepository.cpp">
-      <Filter>Source Files\Workman\Repositories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +125,12 @@
     <ClInclude Include="ReaderCardRepository.h">
       <Filter>Header Files\ReaderCard\Repositories</Filter>
     </ClInclude>
+    <ClInclude Include="WorkmanResolveOperation.h">
+      <Filter>Header Files\Workman\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="WorkmanTypeHelper.h">
+      <Filter>Header Files\Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="books.json">
@@ -149,5 +146,8 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="ClassDiagram.cd" />
+    <None Include="workmans.json">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

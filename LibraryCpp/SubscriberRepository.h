@@ -17,9 +17,9 @@ private:
 public:
 	static SubscriberRepository* GetInstance();
 
-	Subscriber Object(int id);
+	Subscriber* Object(int id);
 
-	Subscriber Create(std::string name);
+	Subscriber* Create(std::string name);
 
-	void Delete(Subscriber subscriber);
+	void Delete(Subscriber* subscriber);
 };

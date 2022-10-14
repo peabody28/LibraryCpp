@@ -1,7 +1,11 @@
 #pragma once
 #include "Workman.h"
 
-class Assistant : public Workman
+namespace staff
 {
-	// where is book method
-};
+	class Assistant : public Workman
+	{
+	public:
+		Assistant();
+	};
+}

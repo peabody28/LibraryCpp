@@ -5,7 +5,7 @@
 class BookRepository
 {
 private:
-	std::vector<Book> books;
+	std::vector<Book*> books;
 
 	void Build();
 
@@ -17,7 +17,7 @@ public:
 
 	static BookRepository* GetInstance();
 
-	Book Object(int id);
+	Book* Object(int id);
 
-	std::vector<Book> Collection();
+	std::vector<Book*> Collection();
 };

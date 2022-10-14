@@ -1,8 +1,11 @@
 #pragma once
 #include "Manager.h"
 
-class Director : public Manager
+namespace staff
 {
-	// delete user method
-	// workman organisation
-};
+	class Director : public Manager
+	{
+	public:
+		Director();
+	};
+}

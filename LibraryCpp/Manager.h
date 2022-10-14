@@ -1,8 +1,13 @@
 #pragma once
 #include "Workman.h"
 
-class Manager : public Workman
+namespace staff
 {
-	// block user method
-	// insert book method ?
-};
+	class Manager : public Workman
+	{
+	public:
+		Manager();
+
+		Manager(WorkmanType w);
+	};
+}
