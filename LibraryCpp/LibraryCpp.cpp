@@ -487,6 +487,18 @@ std::vector<std::map<std::string, std::string>> JsonHelper::Parse(std::string js
 	return objs;
 }
 
+std::string JsonHelper::Serialize(std::map<std::string, std::string> obj)
+{
+	std::string json = "{";
+
+	for (auto row : obj)
+		json = json + "\"" + row.first + "\"" + ":" + "\"" + row.second + "\"" + ",";
+
+	json += "}";
+
+	return json;
+}
+
 #pragma endregion JsonHelper
 
 #pragma region FileHelper

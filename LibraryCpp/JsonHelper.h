@@ -7,6 +7,8 @@ class JsonHelper
 {
 public:
 	static std::vector<std::map<std::string, std::string>> Parse(std::string json);
+
+	static std::string Serialize(std::map<std::string, std::string> obj);
 };
 
 

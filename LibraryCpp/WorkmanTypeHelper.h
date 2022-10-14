@@ -1,6 +1,7 @@
 #pragma once
-#include "WorkmanType.h"
 #include <string>
+
+enum WorkmanType;
 
 class WorkmanTypeHelper
 {

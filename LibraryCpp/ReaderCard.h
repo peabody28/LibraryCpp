@@ -1,11 +1,11 @@
 #pragma once
 #include <vector>
 #include "SubscriberRepository.h"
-#include "Subscriber.h"
 #include "RowRepository.h"
 
 class Row;
 class Book;
+class Subscriber;
 
 class ReaderCard
 {
