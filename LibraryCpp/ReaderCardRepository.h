@@ -19,6 +19,7 @@ private:
 	static ReaderCardRepository* obj;
 
 public:
+	static void UpdateData();
 
 	static ReaderCardRepository* GetInstance();
 

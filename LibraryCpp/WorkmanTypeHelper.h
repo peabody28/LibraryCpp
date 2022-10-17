@@ -7,4 +7,6 @@ class WorkmanTypeHelper
 {
 public:
 	static WorkmanType Parse(std::string type);
+
+	static std::string ToString(WorkmanType w);
 };

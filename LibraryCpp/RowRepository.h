@@ -13,6 +13,7 @@ private:
 	
 	RowRepository();
 public:
+	static void UpdateData();
 
 	static RowRepository* GetInstance();
 

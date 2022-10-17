@@ -15,6 +15,8 @@ private:
 	SubscriberRepository();
 
 public:
+	void static UpdateData();
+
 	static SubscriberRepository* GetInstance();
 
 	Subscriber* Object(int id);

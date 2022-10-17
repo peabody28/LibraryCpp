@@ -15,6 +15,8 @@ private:
 
 public:
 
+	void static UpdateData();
+
 	static BookRepository* GetInstance();
 
 	Book* Object(int id);

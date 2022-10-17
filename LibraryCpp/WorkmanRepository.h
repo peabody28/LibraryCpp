@@ -14,7 +14,11 @@ private:
 	WorkmanRepository();
 public:
 
+	void static UpdateData();
+
 	static WorkmanRepository* GetInstance();
 
 	Workman* Object(int _workmanId);
+
+	Workman* Add(int id, WorkmanType w);
 };
