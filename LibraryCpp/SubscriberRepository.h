@@ -1,25 +1,28 @@
 #pragma once
 #include <vector>
 #include <string>
+#include "IRepository.h"
 
 class Subscriber;
 
-class SubscriberRepository
+class SubscriberRepository : public IRepository<Subscriber>
 {
 private:
 	static SubscriberRepository* obj;
-	std::vector<Subscriber*> subscribers;
-
-	void Build();
 
 	SubscriberRepository();
 
-public:
-	void static UpdateData();
+protected:
+	void Build() override;
 
+	std::map<std::string, std::string> Serialize(Subscriber* obj)  override;
+
+public:
 	static SubscriberRepository* GetInstance();
 
 	Subscriber* Object(int id);
+
+	Subscriber* Object(std::string name);
 
 	Subscriber* Create(std::string name);
 

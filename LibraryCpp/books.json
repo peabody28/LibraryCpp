@@ -1,12 +1,1 @@
-[
-  {
-    "id": "1",
-    "title": "Math",
-    "author": "Kopernik"
-  },
-  {
-    "id": "2",
-    "title": "Phys",
-    "author": "Avagadro"
-  }
-]
+[{"author":"Kopernik","id":"1","title":"Math",},{"author":"Avagadro","id":"2","title":"Phys",},]

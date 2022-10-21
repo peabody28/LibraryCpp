@@ -1,20 +1,20 @@
 #pragma once
 #include "Workman.h"
-#include <vector>
-#include <string>
+#include "IRepository.h"
 
-class WorkmanRepository
+class WorkmanRepository : public IRepository<Workman>
 {
 private:
 	static WorkmanRepository* obj;
-	std::vector<Workman*> staff;
-
-	void Build();
 
 	WorkmanRepository();
-public:
 
-	void static UpdateData();
+protected:
+	void Build() override;
+
+	std::map<std::string, std::string> Serialize(Workman* obj) override;
+
+public:
 
 	static WorkmanRepository* GetInstance();
 

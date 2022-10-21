@@ -13,4 +13,6 @@ public:
 	static DateTime Now();
 
 	static DateTime Parse(std::string s);
+
+	static std::string ToString(DateTime& date);
 };

@@ -1,20 +1,22 @@
 #pragma once
 #include <vector>
+#include "IRepository.h"
 
 class Row;
 
-class RowRepository
+class RowRepository : public IRepository<Row>
 {
 private:
 	static RowRepository* obj;
-	std::vector<Row*> rows;
-
-	void Build();
 	
 	RowRepository();
-public:
-	static void UpdateData();
 
+protected:
+	void Build() override;
+
+	std::map<std::string, std::string> Serialize(Row* obj) override;
+
+public:
 	static RowRepository* GetInstance();
 
 	Row* Object(int rowId);

@@ -1,26 +1,27 @@
 #pragma once
 #include <vector>
 #include "SubscriberRepository.h"
+#include "IRepository.h"
 
 class ReaderCard;
 class Subscriber;
 class Book;
 
-class ReaderCardRepository
+class ReaderCardRepository : public IRepository<ReaderCard>
 {
 private:
 	SubscriberRepository* subscriberRepository;
-	std::vector<ReaderCard*> readerCards;
-
-	void Build();
 
 	ReaderCardRepository();
 
 	static ReaderCardRepository* obj;
 
-public:
-	static void UpdateData();
+protected:
+	void Build() override;
 
+	std::map<std::string, std::string> Serialize(ReaderCard* obj)  override;
+
+public:
 	static ReaderCardRepository* GetInstance();
 
 	ReaderCard* Object(Subscriber* subscriber);

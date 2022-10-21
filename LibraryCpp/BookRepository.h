@@ -1,22 +1,22 @@
 #pragma once
 #include <vector>
+#include <map>
 #include "Book.h"
+#include "IRepository.h"
 
-class BookRepository
+class BookRepository : public IRepository<Book>
 {
 private:
-	std::vector<Book*> books;
-
-	void Build();
-
 	BookRepository();
 
 	static BookRepository* obj;
 
+protected:
+	void Build() override;
+	
+	std::map<std::string, std::string> Serialize(Book* obj)  override;
+	
 public:
-
-	void static UpdateData();
-
 	static BookRepository* GetInstance();
 
 	Book* Object(int id);

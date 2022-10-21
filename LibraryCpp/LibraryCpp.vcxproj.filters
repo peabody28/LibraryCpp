@@ -52,6 +52,9 @@
     <Filter Include="Header Files\Workman\Operations">
       <UniqueIdentifier>{daae9641-c2b5-4e81-8871-a95b1d730a07}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Common">
+      <UniqueIdentifier>{c1c40c7e-8c51-49f4-8e7f-15a2c0225feb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LibraryCpp.cpp">
@@ -130,6 +133,9 @@
     </ClInclude>
     <ClInclude Include="WorkmanTypeHelper.h">
       <Filter>Header Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="IRepository.h">
+      <Filter>Header Files\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

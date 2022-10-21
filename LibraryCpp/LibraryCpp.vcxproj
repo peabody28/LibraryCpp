@@ -143,6 +143,7 @@
     <ClInclude Include="BookRepository.h" />
     <ClInclude Include="Exception.h" />
     <ClInclude Include="FileHelper.h" />
+    <ClInclude Include="IRepository.h" />
     <ClInclude Include="PermissionDeniedException.h" />
     <ClInclude Include="ReaderCard.h" />
     <ClInclude Include="ReaderCardRepository.h" />
