@@ -13,7 +13,7 @@ private:
 	static BookRepository* obj;
 
 protected:
-	void Build() override;
+	std::vector<Book*> Build() override;
 	
 	std::map<std::string, std::string> Serialize(Book* obj)  override;
 	

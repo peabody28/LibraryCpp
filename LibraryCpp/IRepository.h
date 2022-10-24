@@ -10,7 +10,7 @@ protected:
 
 	std::string filename;
 
-	void virtual Build() = 0;
+	std::vector<T*> virtual Build() = 0;
 
 	virtual std::map<std::string, std::string> Serialize(T* obj) = 0;
 

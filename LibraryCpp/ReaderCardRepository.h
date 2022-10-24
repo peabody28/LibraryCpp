@@ -17,7 +17,7 @@ private:
 	static ReaderCardRepository* obj;
 
 protected:
-	void Build() override;
+	std::vector<ReaderCard*> Build() override;
 
 	std::map<std::string, std::string> Serialize(ReaderCard* obj)  override;
 
@@ -33,10 +33,4 @@ public:
 	bool AlreadyTaken(Book* book);
 
 	ReaderCard* Create(std::string username);
-
-	int GenerateReaderCardId();
-
-	void Delete(Subscriber* subscriber);
-
-	void AddRow(Subscriber* subscriber, Book* book);
 };

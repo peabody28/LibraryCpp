@@ -13,7 +13,7 @@ private:
 	SubscriberRepository();
 
 protected:
-	void Build() override;
+	std::vector<Subscriber*> Build() override;
 
 	std::map<std::string, std::string> Serialize(Subscriber* obj)  override;
 
@@ -25,6 +25,4 @@ public:
 	Subscriber* Object(std::string name);
 
 	Subscriber* Create(std::string name);
-
-	void Delete(Subscriber* subscriber);
 };

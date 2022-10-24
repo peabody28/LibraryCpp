@@ -12,7 +12,7 @@ private:
 	RowRepository();
 
 protected:
-	void Build() override;
+	std::vector<Row*> Build() override;
 
 	std::map<std::string, std::string> Serialize(Row* obj) override;
 

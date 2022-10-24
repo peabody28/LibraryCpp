@@ -29,9 +29,9 @@ public:
 
 	ReaderCard* AddSubcriber(std::string username);
 
-	void SwitchSubscriberState(std::string name, Workman workman);
+	void SwitchSubscriberState(std::string name, Workman* workman);
 
-	void DeleteSubscriber(std::string name, Workman workman);
+	void DeleteSubscriber(std::string name, Workman* workman);
 
 	void GiveBook(ReaderCard* readerCard, Book* book, Workman* workman);
 };

@@ -16,12 +16,13 @@ public:
 	int id;
 	int subscriberId;
 	bool isBlocked;
+	bool isDeleted;
 
 	ReaderCard();
 
 	ReaderCard(Subscriber* sub);
 
-	ReaderCard(int _id, int _subscriberId, bool _isBlocked);
+	ReaderCard(int _id, int _subscriberId, bool _isBlocked, bool _isDeleted);
 
 	Subscriber* _Subscriber();
 
