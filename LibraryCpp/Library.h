@@ -33,5 +33,5 @@ public:
 
 	void DeleteSubscriber(std::string name, Workman workman);
 
-	void GiveBook(Subscriber* sub, Book* book, Workman workman);
+	void GiveBook(ReaderCard* readerCard, Book* book, Workman* workman);
 };

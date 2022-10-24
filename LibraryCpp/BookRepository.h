@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 #include <map>
 #include "Book.h"
 #include "IRepository.h"
@@ -19,7 +20,9 @@ protected:
 public:
 	static BookRepository* GetInstance();
 
-	Book* Object(int id);
+	Book* Object(int bookId);
+
+	Book* Object(std::string title);
 
 	std::vector<Book*> Collection();
 };

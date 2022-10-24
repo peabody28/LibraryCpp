@@ -24,13 +24,17 @@ protected:
 public:
 	static ReaderCardRepository* GetInstance();
 
-	ReaderCard* Object(Subscriber* subscriber);
+	ReaderCard* Object(std::string name);
 
 	ReaderCard* Object(int subscriberId);
 
 	std::vector<ReaderCard*> Collection();
 
+	bool AlreadyTaken(Book* book);
+
 	ReaderCard* Create(std::string username);
+
+	int GenerateReaderCardId();
 
 	void Delete(Subscriber* subscriber);
 

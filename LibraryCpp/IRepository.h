@@ -16,4 +16,6 @@ protected:
 
 public:
 	void UpdateData();
+
+	int GenerateId();
 };

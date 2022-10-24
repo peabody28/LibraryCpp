@@ -27,7 +27,7 @@ public:
 
 	void AddRow(Book* book);
 
-	std::vector<Row*> Rows(ReaderCard* readerCard);
+	std::vector<Row*> Rows();
 
 	void SwitchIsBlocked();
 };
