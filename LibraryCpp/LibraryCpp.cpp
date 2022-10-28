@@ -900,7 +900,11 @@ ActionFilter::ActionFilter()
 	AddPermission(WorkmanType::Assistant, ActionType::AddSubscriber);
 	AddPermission(WorkmanType::Assistant, ActionType::GiveBook);
 
-	AddPermission(WorkmanType::Assistant, ActionType::BlockSubscriber);
+	AddPermission(WorkmanType::Manager, ActionType::BlockSubscriber);
+
+	AddPermission(WorkmanType::Director, ActionType::BlockSubscriber);
+	AddPermission(WorkmanType::Director, ActionType::DeleteSubscriber);
+
 }
 
 ActionFilter::Iterator ActionFilter::Find(ActionType actionType)
@@ -1043,10 +1047,7 @@ void Library::SwitchSubscriberState(std::string name, Workman* workman)
 /// <param name="workman"></param>
 void Library::DeleteSubscriber(std::string name, Workman* workman)
 {
-	
-
-	//if(actionFilter[ActionType::DeleteSubscriber].)
-	if (workman->type != Director)
+	if (!actionFilter.IsActionAvailable(workman->type, ActionType::DeleteSubscriber))
 		throw PermissionDeniedException();
 
 	ReaderCard* readerCard = readerCardRepository->Object(name);
@@ -1056,7 +1057,7 @@ void Library::DeleteSubscriber(std::string name, Workman* workman)
 
 void Library::GiveBook(ReaderCard* readerCard, Book* book, Workman* workman)
 {
-	if (workman->type != Assistant)
+	if (!actionFilter.IsActionAvailable(workman->type, ActionType::GiveBook))
 		throw PermissionDeniedException();
 	
 	readerCard->AddRow(book);
