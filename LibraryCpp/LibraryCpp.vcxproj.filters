@@ -55,6 +55,9 @@
     <Filter Include="Header Files\Common">
       <UniqueIdentifier>{c1c40c7e-8c51-49f4-8e7f-15a2c0225feb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ActionFilter">
+      <UniqueIdentifier>{8bf9386c-9fcf-4973-b85d-9f8e137fca34}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LibraryCpp.cpp">
@@ -89,6 +92,9 @@
     </ClCompile>
     <ClCompile Include="JsonHelper.h">
       <Filter>Header Files\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionFilter.h">
+      <Filter>Header Files\ActionFilter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +143,9 @@
     <ClInclude Include="IRepository.h">
       <Filter>Header Files\Common</Filter>
     </ClInclude>
+    <ClInclude Include="ActionType.h">
+      <Filter>Header Files\ActionFilter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="books.json">
@@ -151,9 +160,9 @@
     <None Include="reader_cards.json">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="ClassDiagram.cd" />
     <None Include="workmans.json">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

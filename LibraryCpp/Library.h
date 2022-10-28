@@ -3,6 +3,7 @@
 #include "WorkmanRepository.h"
 #include "BookRepository.h"
 #include "SubscriberRepository.h"
+#include "ActionFilter.h"
 #include <string>
 
 class Subscriber;
@@ -16,6 +17,7 @@ public:
 	ReaderCardRepository* readerCardRepository;
 	SubscriberRepository* subscriberRepository;
 	WorkmanRepository* workmanRepository;
+	ActionFilter actionFilter;
 
 	Library();
 

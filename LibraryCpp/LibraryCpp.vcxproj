@@ -137,9 +137,11 @@
     <ClCompile Include="LibraryCpp.cpp" />
     <ClCompile Include="Manager.h" />
     <ClCompile Include="Row.h" />
+    <ClCompile Include="ActionFilter.h" />
     <ClCompile Include="Workman.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActionType.h" />
     <ClInclude Include="BookRepository.h" />
     <ClInclude Include="Exception.h" />
     <ClInclude Include="FileHelper.h" />

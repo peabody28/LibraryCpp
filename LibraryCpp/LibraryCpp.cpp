@@ -28,6 +28,8 @@
 
 #include "Library.h"
 
+#include "ActionType.h"
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -132,22 +134,29 @@ ReaderCardRepository* ReaderCardRepository::obj = nullptr;
 
 std::vector<ReaderCard*> ReaderCardRepository::Build()
 {
-	std::ifstream f(filename);
-
-	std::string json = FileHelper::Read(&f);
-
-	auto collection = JsonHelper::Parse(json);
-	
-	std::vector<ReaderCard*> arr;
-
-	for (auto row : collection)
+	try
 	{
-		ReaderCard *tmp = new ReaderCard(StringHelper::ToInt(row["id"]), StringHelper::ToInt(row["subscriberId"]), StringHelper::ToBool(row["isBlocked"]), StringHelper::ToBool(row["isDeleted"]));
-		arr.push_back(tmp);
-	}
-	f.close();
+		std::ifstream f(filename);
 
-	return arr;
+		std::string json = FileHelper::Read(&f);
+
+		auto collection = JsonHelper::Parse(json);
+
+		std::vector<ReaderCard*> arr;
+
+		for (auto row : collection)
+		{
+			ReaderCard* tmp = new ReaderCard(StringHelper::ToInt(row["id"]), StringHelper::ToInt(row["subscriberId"]), StringHelper::ToBool(row["isBlocked"]), StringHelper::ToBool(row["isDeleted"]));
+			arr.push_back(tmp);
+		}
+		f.close();
+
+		return arr;
+	}
+	catch (const char* msg)
+	{
+		std::cout << std::string(msg);
+	}
 }
 
 std::map<std::string, std::string>  ReaderCardRepository::Serialize(ReaderCard* obj)
@@ -282,21 +291,28 @@ RowRepository* RowRepository::obj = nullptr;
 
 std::vector<Row*> RowRepository::Build()
 {
-	std::ifstream f(filename);
-
-	std::string json = FileHelper::Read(&f);
-
-	auto collection = JsonHelper::Parse(json);
-
-	std::vector<Row*> arr;
-	for (auto row : collection)
+	try
 	{
-		Row* tmp = new Row(StringHelper::ToInt(row["id"]), StringHelper::ToInt(row["bookId"]), StringHelper::ToInt(row["readerCardId"]), DateTimeHelper::Parse(row["dateFrom"]), DateTimeHelper::Parse(row["dateTo"]), StringHelper::ToBool(row["isReturned"]));
-		arr.push_back(tmp);
-	}
-	f.close();
+		std::ifstream f(filename);
 
-	return arr;
+		std::string json = FileHelper::Read(&f);
+
+		auto collection = JsonHelper::Parse(json);
+
+		std::vector<Row*> arr;
+		for (auto row : collection)
+		{
+			Row* tmp = new Row(StringHelper::ToInt(row["id"]), StringHelper::ToInt(row["bookId"]), StringHelper::ToInt(row["readerCardId"]), DateTimeHelper::Parse(row["dateFrom"]), DateTimeHelper::Parse(row["dateTo"]), StringHelper::ToBool(row["isReturned"]));
+			arr.push_back(tmp);
+		}
+		f.close();
+
+		return arr;
+	}
+	catch (const char* msg)
+	{
+		std::cout << std::string(msg);
+	}
 }
 
 std::map<std::string, std::string>  RowRepository::Serialize(Row* obj)
@@ -369,22 +385,30 @@ SubscriberRepository* SubscriberRepository::obj = nullptr;
 
 std::vector<Subscriber*> SubscriberRepository::Build()
 {
-	std::ifstream f(filename);
-
-	std::string json = FileHelper::Read(&f);
-
-	auto collection = JsonHelper::Parse(json);
-
-	std::vector<Subscriber*> arr;
-
-	for (auto row : collection)
+	try
 	{
-		Subscriber *tmp = new Subscriber(StringHelper::ToInt(row["id"]), row["name"]);
-		arr.push_back(tmp);
-	}
-	f.close();
+		std::ifstream f(filename);
 
-	return arr;
+		std::string json = FileHelper::Read(&f);
+
+		auto collection = JsonHelper::Parse(json);
+
+		std::vector<Subscriber*> arr;
+
+		for (auto row : collection)
+		{
+			Subscriber* tmp = new Subscriber(StringHelper::ToInt(row["id"]), row["name"]);
+			arr.push_back(tmp);
+		}
+		f.close();
+
+		return arr;
+	}
+	catch(const char* msg)
+	{
+		std::cout <<std::string(msg);
+	}
+	
 }
 
 std::map<std::string, std::string> SubscriberRepository::Serialize(Subscriber* obj)
@@ -684,22 +708,30 @@ BookRepository* BookRepository::obj = nullptr;
 
 std::vector<Book*> BookRepository::Build()
 {
-	std::ifstream f(filename);
-
-	std::string json = FileHelper::Read(&f);
-
-	auto collection = JsonHelper::Parse(json);
-
-	std::vector<Book*> arr;
-
- 	for (auto row : collection)
+	try
 	{
-		Book* tmp = new Book(StringHelper::ToInt(row["id"]), row["title"], row["author"]);
-		arr.push_back(tmp);
-	}
+		std::ifstream f(filename);
 
-	f.close();
-	return arr;
+		std::string json = FileHelper::Read(&f);
+
+		auto collection = JsonHelper::Parse(json);
+
+		std::vector<Book*> arr;
+
+		for (auto row : collection)
+		{
+			Book* tmp = new Book(StringHelper::ToInt(row["id"]), row["title"], row["author"]);
+			arr.push_back(tmp);
+		}
+
+		f.close();
+		return arr;
+	}
+	catch (const char* msg)
+	{
+		std::cout << std::string(msg);
+	}
+	
 }
 
 std::map<std::string, std::string> BookRepository::Serialize(Book* obj)
@@ -792,21 +824,29 @@ WorkmanRepository* WorkmanRepository::obj = nullptr;
 
 std::vector<Workman*> WorkmanRepository::Build()
 {
-	std::ifstream f(filename);
-
-	std::string json = FileHelper::Read(&f);
-
-	auto collection = JsonHelper::Parse(json);
-
-	std::vector<Workman*> arr;
-	for (auto row : collection)
+	try
 	{
-		Workman* tmp = WorkmanResolveOperation::Resolve(WorkmanTypeHelper::Parse(row["type"]));
-		tmp->id = StringHelper::ToInt(row["id"]);
-		arr.push_back(tmp);
+		std::ifstream f(filename);
+
+		std::string json = FileHelper::Read(&f);
+
+		auto collection = JsonHelper::Parse(json);
+
+		std::vector<Workman*> arr;
+		for (auto row : collection)
+		{
+			Workman* tmp = WorkmanResolveOperation::Resolve(WorkmanTypeHelper::Parse(row["type"]));
+			tmp->id = StringHelper::ToInt(row["id"]);
+			arr.push_back(tmp);
+		}
+		f.close();
+		return arr;
 	}
-	f.close();
-	return arr;
+	catch (const char* msg)
+	{
+		std::cout << std::string(msg);
+	}
+	
 }
 
 std::map<std::string, std::string> WorkmanRepository::Serialize(Workman* obj)
@@ -831,11 +871,11 @@ WorkmanRepository* WorkmanRepository::GetInstance()
 	return obj;
 }
 
-Workman* WorkmanRepository::Object(WorkmanType w)
+Workman* WorkmanRepository::Object(int id)
 {
-	for (auto man : repository)
-		if (man->type == w)
-			return man;
+	for (auto w : repository)
+		if (w->id == id)
+			return w;
 	return NULL;
 }
 
@@ -849,6 +889,90 @@ Workman* WorkmanRepository::Add(int _id, WorkmanType w)
 }
 
 #pragma endregion WorkmanRepository
+
+#pragma region ActionFilter
+
+ActionFilter::ActionFilter()
+{
+	actionFilters = nullptr;
+	count = 0;
+
+	AddPermission(WorkmanType::Assistant, ActionType::AddSubscriber);
+	AddPermission(WorkmanType::Assistant, ActionType::GiveBook);
+
+	AddPermission(WorkmanType::Assistant, ActionType::BlockSubscriber);
+}
+
+ActionFilter::Iterator ActionFilter::Find(ActionType actionType)
+{
+	ActionFilter x = *(this);
+	for (auto i = x.begin(); i != x.end(); i++)
+		if((*i).first == actionType)
+			return i;
+	return x.end();
+}
+
+void ActionFilter::Insert(Iterator::value_type v)
+{
+	if (actionFilters == nullptr)
+		actionFilters = (Iterator::pointer)malloc(sizeof(std::pair<ActionType, std::pair<int, WorkmanType*>>));
+	else
+		actionFilters = (Iterator::pointer)realloc(actionFilters, sizeof(std::pair<ActionType, std::pair<int, WorkmanType*>>)*(count+1));
+
+	actionFilters[count].first = v.first;
+	actionFilters[count].second = v.second;
+
+	count++;
+}
+
+void ActionFilter::AddPermission(WorkmanType workmanType, ActionType type)
+{
+	auto item = (*this).Find(type);
+	if (item != (*this).end())
+	{
+		int index = (*item).second.first;
+		(*item).second.second[index] = workmanType;
+		(*item).second.first++;
+		return;
+	}
+
+	std::pair<ActionType, std::pair<int, WorkmanType*>> tmp;
+	tmp.first = type;
+	tmp.second.first = 1;
+	tmp.second.second = new WorkmanType[1];
+	tmp.second.second[0] = workmanType;
+
+	this->Insert(tmp);
+}
+
+WorkmanType* ActionFilter::Permissions(ActionType actionType, int* count)
+{
+	auto item = Find(actionType);
+
+	if (item != end())
+	{
+		*count = (*item).second.first;
+		return (*item).second.second;
+	}
+
+	return NULL;
+}
+
+bool ActionFilter::IsActionAvailable(WorkmanType workmanType, ActionType type)
+{
+	int count = 0;
+	auto f = Permissions(type, &count);
+	if (f == NULL)
+		return false;
+
+	for (int i = 0; i < count; i++)
+		if (f[i] == workmanType)
+			return true;
+
+	return false;
+}
+
+#pragma endregion ActionFilter
 
 #pragma region Library
 
@@ -898,17 +1022,30 @@ ReaderCard* Library::AddSubcriber(std::string username)
 	return readerCardRepository->Create(username);
 }
 
+/// <summary>
+/// only for manager or director
+/// </summary>
+/// <param name="subscriber name"></param>
+/// <param name="workman"></param>
 void Library::SwitchSubscriberState(std::string name, Workman* workman)
 {
-	if (workman->type != Manager && workman->type != Director)
+	if(!actionFilter.IsActionAvailable(workman->type, ActionType::BlockSubscriber))
 		throw PermissionDeniedException();
 
 	ReaderCard* readerCard = readerCardRepository->Object(name);
 	readerCard->SwitchIsBlocked();
 }
 
+/// <summary>
+/// only for director
+/// </summary>
+/// <param name="name"></param>
+/// <param name="workman"></param>
 void Library::DeleteSubscriber(std::string name, Workman* workman)
 {
+	
+
+	//if(actionFilter[ActionType::DeleteSubscriber].)
 	if (workman->type != Director)
 		throw PermissionDeniedException();
 
@@ -1041,8 +1178,8 @@ void PrintActions()
 	std::cout << "'debts' - show subscriber's debts" << std::endl;
 	std::cout << "'add_sub' - create subscriber's reader card" << std::endl;
 	std::cout << "'give_book' - add row to the specified user reader card" << std::endl;
-	std::cout << "'block_subscriber' - block subscriber's reader card (you can unblock it)" << std::endl;
-	std::cout << "'delete_subscriber' - remove subscriber's reader card (you can't cancel this action)" << std::endl;
+	std::cout << "'block_sub' - block subscriber's reader card (you can unblock it via this method too)" << std::endl;
+	std::cout << "'delete_sub - remove subscriber's reader card (you can't cancel this action)" << std::endl;
 }
 
 int main()
@@ -1112,7 +1249,11 @@ int main()
 				continue;
 			}
 
-			Workman* assistant = library.workmanRepository->Object(WorkmanType::Assistant);
+			std::cout << "Input assistant id:";
+			int id;
+			std::cin >> id;
+
+			Workman* assistant = library.workmanRepository->Object(id);
 
 			LockAction([&]() 
 			{
@@ -1125,7 +1266,10 @@ int main()
 			std::string name;
 			std::cin >> name;
 
-			Workman* manager = library.workmanRepository->Object(WorkmanType::Manager);
+			std::cout << "Input manager or director id:";
+			int id;
+			std::cin >> id;
+			Workman* manager = library.workmanRepository->Object(id);
 
 			LockAction([&]()
 			{
@@ -1138,11 +1282,14 @@ int main()
 			std::string name;
 			std::cin >> name;
 
-			Workman* manager = library.workmanRepository->Object(WorkmanType::Director);
+			std::cout << "Input director id:";
+			int id;
+			std::cin >> id;
+			Workman* director = library.workmanRepository->Object(id);
 
 			LockAction([&]()
 			{
-				library.DeleteSubscriber(name, manager);
+				library.DeleteSubscriber(name, director);
 			});
 		}
 	}

@@ -18,7 +18,7 @@ public:
 
 	static WorkmanRepository* GetInstance();
 
-	Workman* Object(WorkmanType w);
+	Workman* Object(int id);
 
 	Workman* Add(int id, WorkmanType w);
 };
