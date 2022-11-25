@@ -1172,7 +1172,6 @@ void LockAction(const std::function<void()>& f)
 
 void PrintActions()
 {
-	std::cout << std::endl;
 	std::cout << "'books' - show list of books in library" << std::endl;
 	std::cout << "'subs' - show list of subscribers" << std::endl;
 	std::cout << "'sub_books' - show list of subscriber's books" << std::endl;
@@ -1180,7 +1179,8 @@ void PrintActions()
 	std::cout << "'add_sub' - create subscriber's reader card" << std::endl;
 	std::cout << "'give_book' - add row to the specified user reader card" << std::endl;
 	std::cout << "'block_sub' - block subscriber's reader card (you can unblock it via this method too)" << std::endl;
-	std::cout << "'delete_sub - remove subscriber's reader card (you can't cancel this action)" << std::endl;
+	std::cout << "'delete_sub' - remove subscriber's reader card (you can't cancel this action)" << std::endl;
+	std::cout << "'exit' - terminate programm" << std::endl;
 }
 
 int main()
@@ -1188,16 +1188,18 @@ int main()
 	Library library = Library();
 
 	std::thread t1(&WorkmanRepository::UpdateData, library.workmanRepository);
-	std::thread t2(&BookRepository::UpdateData, library.bookRepository);
-	std::thread t3(&SubscriberRepository::UpdateData, library.subscriberRepository);
-	std::thread t4(&RowRepository::UpdateData, RowRepository::GetInstance());
-	std::thread t5(&ReaderCardRepository::UpdateData, library.readerCardRepository);
+	 std::thread t2(&BookRepository::UpdateData, library.bookRepository);
+	  std::thread t3(&SubscriberRepository::UpdateData, library.subscriberRepository);
+	   std::thread t4(&RowRepository::UpdateData, RowRepository::GetInstance());
+	    std::thread t5(&ReaderCardRepository::UpdateData, library.readerCardRepository);
 
 	while (true)
 	{
+		system("cls");
 		PrintActions();
 		std::string action = "";
 		std::cin >> action;
+		system("cls");
 
 		if (!action.compare("books"))
 			library.PrintBooks();
@@ -1209,7 +1211,7 @@ int main()
 			std::string name;
 			std::cin >> name;
 
-			Subscriber *s = library.subscriberRepository->Object(name);
+			Subscriber* s = library.subscriberRepository->Object(name);
 			if (s == NULL)
 			{
 				std::cout << "User with specified name doesn't exists\n";
@@ -1226,10 +1228,10 @@ int main()
 			std::string name;
 			std::cin >> name;
 
-			LockAction([&]() 
-			{
-				library.AddSubcriber(name); 
-			});
+			LockAction([&]()
+				{
+					library.AddSubcriber(name);
+				});
 		}
 		else if (!action.compare("give_book"))
 		{
@@ -1256,10 +1258,10 @@ int main()
 
 			Workman* assistant = library.workmanRepository->Object(id);
 
-			LockAction([&]() 
-			{
-				library.GiveBook(readerCard, book, assistant);
-			});
+			LockAction([&]()
+				{
+					library.GiveBook(readerCard, book, assistant);
+				});
 		}
 		else if (!action.compare("block_sub"))
 		{
@@ -1273,9 +1275,9 @@ int main()
 			Workman* manager = library.workmanRepository->Object(id);
 
 			LockAction([&]()
-			{
-				library.SwitchSubscriberState(name, manager);
-			});
+				{
+					library.SwitchSubscriberState(name, manager);
+				});
 		}
 		else if (!action.compare("delete_sub"))
 		{
@@ -1289,11 +1291,23 @@ int main()
 			Workman* director = library.workmanRepository->Object(id);
 
 			LockAction([&]()
-			{
-				library.DeleteSubscriber(name, director);
-			});
+				{
+					library.DeleteSubscriber(name, director);
+				});
 		}
+		else if (!action.compare("exit"))
+			break;
+
+		std::cout << "\nPress any key for back to menu\n";
+		rewind(stdin);
+		getchar();
 	}
+
+	t1.detach();
+	 t2.detach();
+	  t3.detach();
+	   t4.detach();
+	    t5.detach();
 
 	return 0;
 }
