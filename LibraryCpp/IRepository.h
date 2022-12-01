@@ -5,6 +5,8 @@
 template<class T>
 class IRepository
 {
+private:
+	bool isBusy;
 protected:
 	std::vector<T*> repository;
 
@@ -18,4 +20,6 @@ public:
 	void UpdateData();
 
 	int GenerateId();
+
+	bool IsBusy();
 };

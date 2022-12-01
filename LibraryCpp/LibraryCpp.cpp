@@ -188,7 +188,7 @@ ReaderCardRepository* ReaderCardRepository::GetInstance()
 ReaderCard* ReaderCardRepository::Object(std::string username)
 {
 	for (auto card : repository)
-		if (!card->_Subscriber()->name.compare(username))
+		if (!card->_Subscriber()->name.compare(username) && !card->isBlocked && !card->isDeleted)
 			return card;
 	return NULL;
 }
@@ -196,7 +196,7 @@ ReaderCard* ReaderCardRepository::Object(std::string username)
 ReaderCard* ReaderCardRepository::Object(int subscriberId)
 {
 	for (auto card : repository)
-		if (card->_Subscriber()->id == subscriberId)
+		if (card->_Subscriber()->id == subscriberId && !card->isDeleted)
 			return card;
 	return NULL;
 }
@@ -1000,15 +1000,10 @@ void Library::PrintSubscribers()
 			std::cout << *(card->_Subscriber()) << std::endl;
 }
 
-void Library::PrintBooks(int _subscriberId)
+void Library::PrintBooks(ReaderCard* card)
 {
-	for (auto card : readerCardRepository->Collection())
-		if (card->_Subscriber()->id == _subscriberId)
-		{
-			for (auto row : card->Rows())
-				std::cout << *(row->_Book()) << " " << "dateFrom: " << row->dateFrom << " DateTo: " << row->dateTo << std::endl;
-			break;
-		}
+	for (auto row : card->Rows())
+		std::cout << *(row->_Book()) << " " << "dateFrom: " << row->dateFrom << " DateTo: " << row->dateTo << std::endl;
 }
 
 void Library::Debts()
@@ -1121,7 +1116,7 @@ void IRepository<T>::UpdateData()
 	while (true)
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(UPDATE_REPOSITORIES_DATA_DELAY));
-
+		isBusy = true;
 		std::vector<T*> fromFile = Build();
 
 		// update (memory + file)
@@ -1147,8 +1142,12 @@ void IRepository<T>::UpdateData()
 		f << json;
 
 		f.close();
+		isBusy = false;
 	}
 }
+
+template<class T>
+bool IRepository<T>::IsBusy() { return isBusy; }
 
 template<class T>
 int IRepository<T>::GenerateId()
@@ -1187,15 +1186,27 @@ int main()
 {
 	Library library = Library();
 
+	auto rowRepository = RowRepository::GetInstance();
 	std::thread t1(&WorkmanRepository::UpdateData, library.workmanRepository);
 	 std::thread t2(&BookRepository::UpdateData, library.bookRepository);
 	  std::thread t3(&SubscriberRepository::UpdateData, library.subscriberRepository);
-	   std::thread t4(&RowRepository::UpdateData, RowRepository::GetInstance());
+	   std::thread t4(&RowRepository::UpdateData, rowRepository);
 	    std::thread t5(&ReaderCardRepository::UpdateData, library.readerCardRepository);
 
+	bool isBegin = true;
 	while (true)
 	{
-		system("cls");
+		if (isBegin)
+			isBegin = false;
+		else
+		{
+			std::cout << "\nPress any key for back to menu\n";
+			rewind(stdin);
+			fflush(stdin);
+			getchar();
+			system("cls");
+		}
+
 		PrintActions();
 		std::string action = "";
 		std::cin >> action;
@@ -1211,14 +1222,14 @@ int main()
 			std::string name;
 			std::cin >> name;
 
-			Subscriber* s = library.subscriberRepository->Object(name);
-			if (s == NULL)
+			ReaderCard* readerCard = library.readerCardRepository->Object(name);
+			if (readerCard == NULL)
 			{
 				std::cout << "User with specified name doesn't exists\n";
 				continue;
 			}
 
-			library.PrintBooks(s->id);
+			library.PrintBooks(readerCard);
 		}
 		else if (!action.compare("debts"))
 			library.Debts();
@@ -1240,6 +1251,11 @@ int main()
 			std::cin >> name;
 
 			ReaderCard* readerCard = library.readerCardRepository->Object(name);
+			if(readerCard == NULL)
+			{
+				std::cout << "User is not exists\n";
+				continue;
+			}
 
 			std::cout << "Input book title:";
 			std::string title;
@@ -1298,16 +1314,23 @@ int main()
 		else if (!action.compare("exit"))
 			break;
 
-		std::cout << "\nPress any key for back to menu\n";
-		rewind(stdin);
-		getchar();
+		
 	}
 
+	while (library.workmanRepository->IsBusy());
 	t1.detach();
-	 t2.detach();
-	  t3.detach();
-	   t4.detach();
-	    t5.detach();
+
+	while (library.bookRepository->IsBusy());
+	t2.detach();
+
+	while (library.subscriberRepository->IsBusy());
+	t3.detach();
+
+	while (rowRepository->IsBusy());
+	t4.detach();
+
+	while (library.readerCardRepository->IsBusy());
+	t5.detach();
 
 	return 0;
 }

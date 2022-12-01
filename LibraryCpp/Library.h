@@ -25,7 +25,7 @@ public:
 	
 	void PrintSubscribers();
 
-	void PrintBooks(int _subscriberId);
+	void PrintBooks(ReaderCard* readerCard);
 
 	void Debts();
 
