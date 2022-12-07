@@ -24,7 +24,7 @@ protected:
 public:
 	static ReaderCardRepository* GetInstance();
 
-	ReaderCard* Object(std::string name);
+	ReaderCard* Object(std::string name, bool includeIsBlocked = false);
 
 	ReaderCard* Object(int subscriberId);
 
